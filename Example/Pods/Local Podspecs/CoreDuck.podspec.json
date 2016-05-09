@@ -12,7 +12,7 @@
     "git": "https://github.com/appdev-academy/CoreDuck.git",
     "tag": "0.1.0"
   },
-  "social_media_url": "https://twitter.com/<TWITTER_USERNAME>",
+  "social_media_url": "https://twitter.com/AppDev_Academy",
   "platforms": {
     "ios": "8.0"
   },

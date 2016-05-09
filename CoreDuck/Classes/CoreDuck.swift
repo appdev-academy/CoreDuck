@@ -10,7 +10,7 @@ import CoreData
 public class CoreDuck {
     
     /// Singleton instance
-    static let sharedStack = CoreDuck()
+    public static let sharedStack = CoreDuck()
     
     private var coreDataModelName = "CoreData"
     
@@ -94,13 +94,13 @@ public class CoreDuck {
             do {
                 try receivedContext.save()
                 
-                CoreDataStack.sharedStack.mainContext.performBlock {
+                CoreDuck.sharedStack.mainContext.performBlock {
                     do {
-                        try CoreDataStack.sharedStack.mainContext.save()
+                        try CoreDuck.sharedStack.mainContext.save()
                         
-                        CoreDataStack.sharedStack.writingContext.performBlock {
+                        CoreDuck.sharedStack.writingContext.performBlock {
                             do {
-                                try CoreDataStack.sharedStack.writingContext.save()
+                                try CoreDuck.sharedStack.writingContext.save()
                             } catch {
                                 success = false
                             }
