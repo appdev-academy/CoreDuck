@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors          = { "Maksym Skliarov": "maksym@appdev.academy",
                          "Yura Voevodin": "yura@appdev.academy" }
   s.source           = { git: "https://github.com/appdev-academy/CoreDuck.git", tag: s.version.to_s }
-  s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/AppDev_Academy'
   
   s.ios.deployment_target = '8.0'
   s.source_files = 'CoreDuck/Classes/**/*'
