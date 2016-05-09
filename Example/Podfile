@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'CoreDuck_Example' do
+  pod 'CoreDuck', :path => '../'
+end
+
+target 'CoreDuck_Tests' do
+  pod 'CoreDuck', :path => '../'
+end

@@ -1,0 +1,16 @@
+PODS:
+  - CoreDuck (0.1.0)
+
+DEPENDENCIES:
+  - CoreDuck (from `../`)
+
+EXTERNAL SOURCES:
+  CoreDuck:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CoreDuck: 4acd4de0356df08c33e4569a89997833d6008f76
+
+PODFILE CHECKSUM: 3eb5de04ace273d116537cb71db0b66274d16937
+
+COCOAPODS: 1.0.0.rc.2

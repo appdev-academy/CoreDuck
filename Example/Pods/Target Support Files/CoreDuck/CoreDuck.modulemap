@@ -1,0 +1,6 @@
+framework module CoreDuck {
+  umbrella header "CoreDuck-umbrella.h"
+
+  export *
+  module * { export * }
+}
