@@ -9,8 +9,10 @@ import CoreData
 
 public class CoreDuck {
     
-    /// Singleton instance
-    public static let sharedStack = CoreDuck()
+    /**
+        Singleton instance of CoreData stack
+    */
+    public static let quack = CoreDuck()
     
     private var coreDataModelName = "CoreData"
     
@@ -31,7 +33,6 @@ public class CoreDuck {
     }()
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -94,13 +95,13 @@ public class CoreDuck {
             do {
                 try receivedContext.save()
                 
-                CoreDuck.sharedStack.mainContext.performBlock {
+                CoreDuck.quack.mainContext.performBlock {
                     do {
-                        try CoreDuck.sharedStack.mainContext.save()
+                        try CoreDuck.quack.mainContext.save()
                         
-                        CoreDuck.sharedStack.writingContext.performBlock {
+                        CoreDuck.quack.writingContext.performBlock {
                             do {
-                                try CoreDuck.sharedStack.writingContext.save()
+                                try CoreDuck.quack.writingContext.save()
                             } catch {
                                 success = false
                             }
@@ -129,13 +130,13 @@ public class CoreDuck {
             do {
                 try receivedContext.save()
                 
-                CoreDuck.sharedStack.mainContext.performBlockAndWait {
+                CoreDuck.quack.mainContext.performBlockAndWait {
                     do {
-                        try CoreDuck.sharedStack.mainContext.save()
+                        try CoreDuck.quack.mainContext.save()
                         
-                        CoreDuck.sharedStack.writingContext.performBlockAndWait {
+                        CoreDuck.quack.writingContext.performBlockAndWait {
                             do {
-                                try CoreDuck.sharedStack.writingContext.save()
+                                try CoreDuck.quack.writingContext.save()
                             } catch {
                                 success = false
                             }

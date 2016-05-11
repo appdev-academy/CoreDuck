@@ -9,7 +9,7 @@ import CoreData
 
 // MARK: - NSManagedObject extension
 
-extension NSManagedObject {
+public extension NSManagedObject {
     
     // MARK: - Variables
     
@@ -107,7 +107,7 @@ extension NSManagedObject {
         let fetchRequest = NSFetchRequest(entityName: self.entityName)
         fetchRequest.predicate = predicate
         
-        let count = CoreDuck.sharedStack.mainContext.countForFetchRequest(fetchRequest, error: nil)
+        let count = CoreDuck.quack.mainContext.countForFetchRequest(fetchRequest, error: nil)
         
         return count
     }
@@ -146,7 +146,7 @@ extension NSManagedObject {
         - parameter withPredicate: predicate for search
     */
     static func findFirst(withPredicate predicate: NSPredicate) -> NSManagedObject? {
-        return self.findFirst(withPredicate: predicate, inContext: CoreDuck.sharedStack.mainContext)
+        return self.findFirst(withPredicate: predicate, inContext: CoreDuck.quack.mainContext)
     }
     
     // MARK: - findFirst by attribute in context
@@ -312,7 +312,7 @@ extension NSManagedObject {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.sharedStack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
             
             if let object = results.first as? NSManagedObject  {
                 return object
@@ -500,7 +500,7 @@ extension NSManagedObject {
         fetchRequest.predicate = predicate
         
         do {
-            let results = try CoreDuck.sharedStack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -528,7 +528,7 @@ extension NSManagedObject {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.sharedStack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -558,7 +558,7 @@ extension NSManagedObject {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.sharedStack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -900,7 +900,7 @@ extension NSManagedObject {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDuck.sharedStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDuck.quack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Set delegate
         fetchedResultsController.delegate = delegate

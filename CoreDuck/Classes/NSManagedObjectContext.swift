@@ -9,7 +9,7 @@ import CoreData
 
 // MARK: - NSManagedObjectContext extension
 
-extension NSManagedObjectContext {
+public extension NSManagedObjectContext {
     
     /**
         Save context
@@ -19,12 +19,12 @@ extension NSManagedObjectContext {
     */
     static func saveWithBlock(block: (localContext: NSManagedObjectContext) -> Void, completion: (success: Bool) -> Void) {
         
-        let backgroundContext = CoreDuck.sharedStack.backgroundContext
+        let backgroundContext = CoreDuck.quack.backgroundContext
         
         backgroundContext.performBlock {
             block(localContext: backgroundContext)
             
-            let success = CoreDuck.sharedStack.saveContexts(contextWithObject: backgroundContext)
+            let success = CoreDuck.quack.saveContexts(contextWithObject: backgroundContext)
             
             dispatch_async(dispatch_get_main_queue(), { 
                 completion(success: success)
@@ -40,12 +40,12 @@ extension NSManagedObjectContext {
     */
     static func saveWithBlockAndWait(block: (localContext: NSManagedObjectContext) -> Void, completion: (success: Bool) -> Void) {
         
-        let backgroundContext = CoreDuck.sharedStack.backgroundContext
+        let backgroundContext = CoreDuck.quack.backgroundContext
         
         backgroundContext.performBlockAndWait {
             block(localContext: backgroundContext)
             
-            let success = CoreDuck.sharedStack.saveContextsAndWait(contextWithObject: backgroundContext)
+            let success = CoreDuck.quack.saveContextsAndWait(contextWithObject: backgroundContext)
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(success: success)
