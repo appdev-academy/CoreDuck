@@ -1,6 +1,6 @@
 {
   "name": "CoreDuck",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "summary": "Small and fast CoreData stack written in Swift",
   "homepage": "https://github.com/appdev-academy/CoreDuck",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/appdev-academy/CoreDuck.git",
-    "tag": "0.1.0"
+    "tag": "0.1.2"
   },
   "social_media_url": "https://twitter.com/AppDev_Academy",
   "platforms": {
@@ -20,5 +20,6 @@
   "frameworks": [
     "Foundation",
     "CoreData"
-  ]
+  ],
+  "requires_arc": true
 }

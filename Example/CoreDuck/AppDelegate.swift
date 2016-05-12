@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import CoreDuck
 
 @UIApplicationMain
@@ -23,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             localContext in
             
         }, completion: {
-            
+            success in
         })
         
         return true
