@@ -1,6 +1,6 @@
 # CoreDuck
 
-[![CI Status](http://img.shields.io/travis/Maksym Skliarov/CoreDuck.svg?style=flat)](https://travis-ci.org/Maksym Skliarov/CoreDuck)
+[![CI Status](http://img.shields.io/travis/appdev-academy/CoreDuck.svg?style=flat)](https://travis-ci.org/appdev-academy/CoreDuck)
 [![Version](https://img.shields.io/cocoapods/v/CoreDuck.svg?style=flat)](http://cocoapods.org/pods/CoreDuck)
 [![License](https://img.shields.io/cocoapods/l/CoreDuck.svg?style=flat)](http://cocoapods.org/pods/CoreDuck)
 [![Platform](https://img.shields.io/cocoapods/p/CoreDuck.svg?style=flat)](http://cocoapods.org/pods/CoreDuck)
