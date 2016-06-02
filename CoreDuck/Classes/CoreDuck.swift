@@ -65,7 +65,7 @@ public class CoreDuck {
     /**
         NSManagedObjectContext for main thread usage
     */
-    lazy var mainContext: NSManagedObjectContext = {
+    public lazy var mainContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.parentContext = self.writingContext
         return managedObjectContext

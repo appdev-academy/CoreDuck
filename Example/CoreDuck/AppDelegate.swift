@@ -6,8 +6,8 @@
 //  Copyright (c) 2016 Maksym Skliarov. All rights reserved.
 //
 
-import UIKit
 import CoreDuck
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
