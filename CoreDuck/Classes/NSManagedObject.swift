@@ -737,7 +737,7 @@ public extension NSManagedObject {
     static func findAll(byAttribute attribute: String, withStringValue value: String, inContext context: NSManagedObjectContext) -> [NSManagedObject] {
         
         // Build predicate with value
-        let predicate = NSPredicate(format: "\(attribute) = \(value)")
+        let predicate = NSPredicate(format: "\(attribute) = %@", value)
         
         // Fetch and return data
         return self.findAll(withPredicate: predicate, inContext: context)
@@ -874,7 +874,7 @@ public extension NSManagedObject {
     static func findAll(byAttribute attribute: String, withStringValue value: String) -> [NSManagedObject] {
         
         // Build predicate with value
-        let predicate = NSPredicate(format: "\(attribute) = \(value)")
+        let predicate = NSPredicate(format: "\(attribute) = %@", value)
         
         // Fetch and return data
         return self.findAll(withPredicate: predicate)

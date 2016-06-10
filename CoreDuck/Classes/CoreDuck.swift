@@ -74,7 +74,7 @@ public class CoreDuck {
     /**
         NSManagedObjectContext for background usage
     */
-    internal var backgroundContext: NSManagedObjectContext {
+    public var backgroundContext: NSManagedObjectContext {
         get {
             let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
             managedObjectContext.parentContext = self.mainContext

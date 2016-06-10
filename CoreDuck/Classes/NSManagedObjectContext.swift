@@ -12,7 +12,25 @@ import CoreData
 public extension NSManagedObjectContext {
     
     /**
-        Save context
+        Main NSManagedObjectContext of the app
+        You can use it safely with UIKit, works on the main thread of the app
+        It's a singleton - always returns the smae instance
+    */
+    public static var mainContext: NSManagedObjectContext {
+        return CoreDuck.quack.mainContext
+    }
+    
+    /**
+        Background NSManagedObjectContext.
+        Returns new instance of NSManagedObjectContext each time you access this variable
+        Perfect application of bacground context - asynchronous import of data into CoreData
+    */
+    public static var backgroundContext: NSManagedObjectContext {
+        return CoreDuck.quack.backgroundContext
+    }
+    
+    /**
+        Save NSManagedObjectContext
      
         - parameter block: execute block of code before save
         - parameter localContext: context to save
@@ -33,7 +51,7 @@ public extension NSManagedObjectContext {
     }
     
     /**
-        Save context and wait
+        Save NSManagedObjectContext and wait
      
         - parameter block: execute block of code before save
         - parameter localContext: context to save
