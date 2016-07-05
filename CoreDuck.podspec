@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   
   s.platform = :ios
   s.ios.deployment_target = '8.0'
+
+  s.platform = :osx, '10.10'
   
   s.source_files = 'CoreDuck/Classes/**/*'
   s.frameworks = 'Foundation', 'CoreData'
