@@ -1,5 +1,5 @@
 framework module CoreDuck {
-  umbrella header "CoreDuck-umbrella.h"
+  umbrella header "CoreDuck-iOS-umbrella.h"
 
   export *
   module * { export * }

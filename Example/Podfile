@@ -11,3 +11,9 @@ abstract_target 'CoreDuck Example iOS Test' do
   pod 'CoreDuck', :path => '../'
   target 'CoreDuck_Tests'
 end
+
+abstract_target 'CoreDuck Example macOS' do
+  platform :osx, 10.11
+  pod 'CoreDuck', :path => '../'
+  target 'CoreDuck_Example_macOS'
+end

@@ -15,7 +15,7 @@
   "social_media_url": "https://twitter.com/AppDev_Academy",
   "platforms": {
     "ios": "8.0",
-    "osx": "10.10"
+    "osx": "10.11"
   },
   "source_files": "CoreDuck/Classes/**/*",
   "frameworks": [
