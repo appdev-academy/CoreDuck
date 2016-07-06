@@ -23,6 +23,7 @@
 		DE6B0BC91D2D160300BC6052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BC81D2D160300BC6052 /* ViewController.swift */; };
 		DE6B0BCB1D2D160300BC6052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */; };
 		DE6B0BCE1D2D160300BC6052 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE6B0BCC1D2D160300BC6052 /* Main.storyboard */; };
+		DE6B0BF31D2D1D2C00BC6052 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BF11D2D1D2C00BC6052 /* CoreData.xcdatamodeld */; };
 		FBDCA77CDBB8B8C4430611FF /* Pods_CoreDuck_Example_iOS_Test_CoreDuck_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FBE0C3989CB8DE2903A790 /* Pods_CoreDuck_Example_iOS_Test_CoreDuck_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE6B0BCD1D2D160300BC6052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE6B0BCF1D2D160300BC6052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE6B0BF21D2D1D2C00BC6052 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		E67146BACFD643F8AD5DA35D /* Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F505BAE942A68C8E8BB6DB6D /* Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck Example iOS-CoreDuck_Example/Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +216,7 @@
 				DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */,
 				DE6B0BCC1D2D160300BC6052 /* Main.storyboard */,
 				DE6B0BCF1D2D160300BC6052 /* Info.plist */,
+				DE6B0BF11D2D1D2C00BC6052 /* CoreData.xcdatamodeld */,
 			);
 			path = CoreDuck_Example_macOS;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 			files = (
 				DE6B0BC91D2D160300BC6052 /* ViewController.swift in Sources */,
 				DE6B0BC71D2D160300BC6052 /* AppDelegate.swift in Sources */,
+				DE6B0BF31D2D1D2C00BC6052 /* CoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,6 +787,16 @@
 				DE6B0BBD1D2D13E400BC6052 /* CoreData.xcdatamodel */,
 			);
 			currentVersion = DE6B0BBD1D2D13E400BC6052 /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		DE6B0BF11D2D1D2C00BC6052 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DE6B0BF21D2D1D2C00BC6052 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = DE6B0BF21D2D1D2C00BC6052 /* CoreData.xcdatamodel */;
 			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
