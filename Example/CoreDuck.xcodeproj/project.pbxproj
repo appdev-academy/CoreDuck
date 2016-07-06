@@ -18,6 +18,10 @@
 		D08613557A2521232C7F7774 /* Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67146BACFD643F8AD5DA35D /* Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework */; };
 		DE6B0BBE1D2D13E400BC6052 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BBC1D2D13E400BC6052 /* CoreData.xcdatamodeld */; };
 		DE6B0BBF1D2D13E400BC6052 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BBC1D2D13E400BC6052 /* CoreData.xcdatamodeld */; };
+		DE6B0BC71D2D160300BC6052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BC61D2D160300BC6052 /* AppDelegate.swift */; };
+		DE6B0BC91D2D160300BC6052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B0BC81D2D160300BC6052 /* ViewController.swift */; };
+		DE6B0BCB1D2D160300BC6052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */; };
+		DE6B0BCE1D2D160300BC6052 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE6B0BCC1D2D160300BC6052 /* Main.storyboard */; };
 		FBDCA77CDBB8B8C4430611FF /* Pods_CoreDuck_Example_iOS_Test_CoreDuck_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FBE0C3989CB8DE2903A790 /* Pods_CoreDuck_Example_iOS_Test_CoreDuck_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +60,12 @@
 		B8CC8E22848AC3B72BC868E7 /* Pods-CoreDuck Example iOS Test-CoreDuck_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck Example iOS Test-CoreDuck_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck Example iOS Test-CoreDuck_Tests/Pods-CoreDuck Example iOS Test-CoreDuck_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C661A16D5722D228D545E351 /* CoreDuck.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreDuck.podspec; path = ../CoreDuck.podspec; sourceTree = "<group>"; };
 		DE6B0BBD1D2D13E400BC6052 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		DE6B0BC41D2D160300BC6052 /* CoreDuck_Example_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDuck_Example_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6B0BC61D2D160300BC6052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DE6B0BC81D2D160300BC6052 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DE6B0BCD1D2D160300BC6052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DE6B0BCF1D2D160300BC6052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E67146BACFD643F8AD5DA35D /* Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_Example_iOS_CoreDuck_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F505BAE942A68C8E8BB6DB6D /* Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck Example iOS-CoreDuck_Example/Pods-CoreDuck Example iOS-CoreDuck_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +86,13 @@
 			files = (
 				43DB10B6BEA4ACFD1511E6E7 /* Pods_CoreDuck_Tests.framework in Frameworks */,
 				FBDCA77CDBB8B8C4430611FF /* Pods_CoreDuck_Example_iOS_Test_CoreDuck_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE6B0BC11D2D160300BC6052 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +120,7 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for CoreDuck */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				DE6B0BC51D2D160300BC6052 /* CoreDuck_Example_macOS */,
 				607FACD11AFB9204008FA782 /* Products */,
 				37B4C3087DF068B005D01E81 /* Pods */,
 				97C4A92F23083BF275347D59 /* Frameworks */,
@@ -114,6 +132,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* CoreDuck_Example.app */,
 				607FACE51AFB9204008FA782 /* CoreDuck_Tests.xctest */,
+				DE6B0BC41D2D160300BC6052 /* CoreDuck_Example_macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +198,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DE6B0BC51D2D160300BC6052 /* CoreDuck_Example_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				DE6B0BC61D2D160300BC6052 /* AppDelegate.swift */,
+				DE6B0BC81D2D160300BC6052 /* ViewController.swift */,
+				DE6B0BCA1D2D160300BC6052 /* Assets.xcassets */,
+				DE6B0BCC1D2D160300BC6052 /* Main.storyboard */,
+				DE6B0BCF1D2D160300BC6052 /* Info.plist */,
+			);
+			path = CoreDuck_Example_macOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,13 +254,30 @@
 			productReference = 607FACE51AFB9204008FA782 /* CoreDuck_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DE6B0BC31D2D160300BC6052 /* CoreDuck_Example_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE6B0BD21D2D160300BC6052 /* Build configuration list for PBXNativeTarget "CoreDuck_Example_macOS" */;
+			buildPhases = (
+				DE6B0BC01D2D160300BC6052 /* Sources */,
+				DE6B0BC11D2D160300BC6052 /* Frameworks */,
+				DE6B0BC21D2D160300BC6052 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreDuck_Example_macOS;
+			productName = CoreDuck_Example_macOS;
+			productReference = DE6B0BC41D2D160300BC6052 /* CoreDuck_Example_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -239,6 +287,9 @@
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					DE6B0BC31D2D160300BC6052 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -257,6 +308,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* CoreDuck_Example */,
 				607FACE41AFB9204008FA782 /* CoreDuck_Tests */,
+				DE6B0BC31D2D160300BC6052 /* CoreDuck_Example_macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -276,6 +328,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE6B0BC21D2D160300BC6052 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE6B0BCB1D2D160300BC6052 /* Assets.xcassets in Resources */,
+				DE6B0BCE1D2D160300BC6052 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +455,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE6B0BC01D2D160300BC6052 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE6B0BC91D2D160300BC6052 /* ViewController.swift in Sources */,
+				DE6B0BC71D2D160300BC6052 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -419,6 +489,14 @@
 				607FACDF1AFB9204008FA782 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		DE6B0BCC1D2D160300BC6052 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE6B0BCD1D2D160300BC6052 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -566,6 +644,39 @@
 			};
 			name = Release;
 		};
+		DE6B0BD01D2D160300BC6052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = CoreDuck_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "academy.appdev.CoreDuck-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DE6B0BD11D2D160300BC6052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CoreDuck_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "academy.appdev.CoreDuck-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -595,6 +706,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DE6B0BD21D2D160300BC6052 /* Build configuration list for PBXNativeTarget "CoreDuck_Example_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE6B0BD01D2D160300BC6052 /* Debug */,
+				DE6B0BD11D2D160300BC6052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
