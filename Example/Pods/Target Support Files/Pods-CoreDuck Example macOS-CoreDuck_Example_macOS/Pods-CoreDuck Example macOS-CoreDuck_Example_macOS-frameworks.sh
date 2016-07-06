@@ -84,8 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/CoreDuck/CoreDuck.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CoreDuck-OSX/CoreDuck.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/CoreDuck/CoreDuck.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CoreDuck-OSX/CoreDuck.framework"
 fi

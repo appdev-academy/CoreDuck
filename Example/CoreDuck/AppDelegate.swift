@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize CoreData stack
         CoreDuck.quack
+        CoreDuck.printErrors = true
         
         // Access main NSManagedContext
         let _ = CoreDuck.quack.mainContext
