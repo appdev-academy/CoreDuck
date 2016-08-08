@@ -20,6 +20,8 @@
 		DE0980D71D587A6600C02F2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0980D61D587A6600C02F2E /* ViewController.swift */; };
 		DE0980D91D587A6600C02F2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE0980D81D587A6600C02F2E /* Assets.xcassets */; };
 		DE0980DC1D587A6600C02F2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0980DA1D587A6600C02F2E /* Main.storyboard */; };
+		DEBD40201D5886C20033DF92 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEBD401E1D5886C20033DF92 /* CoreData.xcdatamodeld */; };
+		DEBD40231D5887230033DF92 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEBD40211D5887230033DF92 /* CoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		DE0980D81D587A6600C02F2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE0980DB1D587A6600C02F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE0980DD1D587A6600C02F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEBD401F1D5886C20033DF92 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		DEBD40221D5887230033DF92 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		DF70E8627286667ED78E8F2A /* Pods-CoreDuck_Example_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck_Example_macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck_Example_macOS/Pods-CoreDuck_Example_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,11 +135,12 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				DEBD40211D5887230033DF92 /* CoreData.xcdatamodeld */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
 			);
 			name = "Example for CoreDuck";
 			path = CoreDuck;
@@ -190,10 +195,11 @@
 			isa = PBXGroup;
 			children = (
 				DE0980D41D587A6600C02F2E /* AppDelegate.swift */,
-				DE0980D61D587A6600C02F2E /* ViewController.swift */,
 				DE0980D81D587A6600C02F2E /* Assets.xcassets */,
-				DE0980DA1D587A6600C02F2E /* Main.storyboard */,
+				DEBD401E1D5886C20033DF92 /* CoreData.xcdatamodeld */,
 				DE0980DD1D587A6600C02F2E /* Info.plist */,
+				DE0980DA1D587A6600C02F2E /* Main.storyboard */,
+				DE0980D61D587A6600C02F2E /* ViewController.swift */,
 			);
 			path = CoreDuck_Example_macOS;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				DEBD40231D5887230033DF92 /* CoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +502,7 @@
 			files = (
 				DE0980D71D587A6600C02F2E /* ViewController.swift in Sources */,
 				DE0980D51D587A6600C02F2E /* AppDelegate.swift in Sources */,
+				DEBD40201D5886C20033DF92 /* CoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,11 +631,14 @@
 			baseConfigurationReference = AC423986E5E330367A4F9E0E /* Pods-CoreDuck_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoreDuck/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -636,11 +647,14 @@
 			baseConfigurationReference = 59406108415709F851849EED /* Pods-CoreDuck_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CoreDuck/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -753,6 +767,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DEBD401E1D5886C20033DF92 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DEBD401F1D5886C20033DF92 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = DEBD401F1D5886C20033DF92 /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		DEBD40211D5887230033DF92 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DEBD40221D5887230033DF92 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = DEBD40221D5887230033DF92 /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }
