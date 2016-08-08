@@ -880,6 +880,8 @@ public extension NSManagedObject {
         return self.findAll(withPredicate: predicate)
     }
     
+    #if os(iOS)
+    
     // MARK: - NSFetchedResultsController functions
     
     /**
@@ -915,6 +917,10 @@ public extension NSManagedObject {
         // Return NSFetchedResultsController
         return fetchedResultsController
     }
+    
+    #endif
+    
+    #if os(iOS)
     
     /**
         Fetch all objects with predicate in context
@@ -954,6 +960,10 @@ public extension NSManagedObject {
         return fetchedResultsController
     }
     
+    #endif
+    
+    #if os(iOS)
+    
     // MARK: - fetchAll by attribute in context
     
     /**
@@ -975,6 +985,7 @@ public extension NSManagedObject {
         return self.fetchAll(withPredicate: predicate, sortBy: sortBy, ascending: ascending, inContext: context, delegate: delegate)
     }
     
+    #endif
     
     // MARK: - Aggregate functions
     

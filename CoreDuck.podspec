@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/appdev-academy/CoreDuck.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/AppDev_Academy'
   
-  s.platform = :ios
   s.ios.deployment_target = '8.0'
-  
+  s.osx.deployment_target = '10.11'
+
   s.source_files = 'CoreDuck/Classes/**/*'
   s.frameworks = 'Foundation', 'CoreData'
   s.requires_arc = true

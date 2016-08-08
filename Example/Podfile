@@ -1,8 +1,13 @@
-platform :ios, 8.0
 use_frameworks!
 
 target 'CoreDuck_Example' do
+  platform :ios, 8.0
   pod 'CoreDuck', :path => '../'
+end
+
+target 'CoreDuck_Example_macOS' do
+    platform :osx, '10.11'
+    pod 'CoreDuck', :path => '../'
 end
 
 target 'CoreDuck_Tests' do
