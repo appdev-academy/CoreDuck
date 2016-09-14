@@ -11,89 +11,103 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+- iOS 8.0+
+- macOS 10.10+
+- Swift 2.2+
+
 ## Installation
 
 CoreDuck is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "CoreDuck"
+pod 'CoreDuck'
 ```
 
-# Creating Entities
+# Creating objects
 
-To create a new instance of an Entity in the context, you can use:
+To create a new Core Data object in specified context:
+
 ```swift
-if let entity = Entity.new(inContext: localContext) as? Entity {
-
+if let newEntity = Entity.new(inContext: localContext) as? Entity {
+  // your code goes here
 }
 ```
 
-# Deleting Entities
+## Deleting objects
 
-To truncate all entities:
 ```swift
 Entity.deleteAllObjects()
 ```
 
-# Fetching Entities
+## Fetching Entities
 
-#### Basic Finding
+#### Basic search
 
-As an example, if you have an entity named *Person* related to a *Department* entity, you can retrieve all of the *Person* entities from your persistent store using the following method:
+As an example, let's assume that you have an entity named *Person*.
+You can retrieve all *Person* entities from your persistent store using the following function:
+
 ```swift
 if let people = Person.findAll(inContext: localContext) as? [Person] {
-
+  // your code goes here
 }
 ```
+
 To return the same entities sorted by a specific attribute:
+
 ```swift
 if let people = Person.findAll(sortedBy: "name", ascending: true) as? [Person] {
-
+  // your code goes here
 }
 ```
-If you have a unique way of retrieving objects from your data store (such as an identifier attribute), you can use the following methods:
+
+If you want to find object in Core Data by attribute, you can use following functions:
 ```swift
 if let people = Person.findAll(byAttribute: "name", withStringValue: "John") as? [Person] {
-
+  // your code goes here
 }
 ```
+
 ```swift
 if let people = Person.findAll(byAttribute: "officeID", withInt64Value: 7) as? [Person] {
-
+  // your code goes here
 }
 ```
-And other...
 
-You can use the same but with specific context:
+You can use same functions, but with specific context, e.g. objects will be returned in context you specified:
+
 ```swift
 if let people = Person.findAll(byAttribute: "name", withStringValue: "John", inContext: localContext) as? [Person] {
-
+  // your code goes here
 }
 ```
+
 ```swift
 if let people = Person.findAll(byAttribute: "officeID", withInt64Value: 7, inContext: localContext) as? [Person] {
-
+  // your code goes here
 }
 ```
 
-#### Advanced Finding
+#### Advanced search
 
-If you want to be more specific with your search, you can use a predicate:
+If you want to execute more accurate search request, you can use predicates:
+
 ```swift
 if let people = Person.findAll(withPredicate: NSPredicate(format: "entityID IN %@", peopleIDs)) as? [Person] {
-
-} 
+  // your code goes here
+}
 ```
 
-And the same with context:
+And the same with specific context:
+
 ```swift
 if let people = Person.findAll(withPredicate: NSPredicate(format: "entityID IN %@", peopleIDs), inContext: localContext) as? [Person] {
-
-} 
+  // your code goes here
+}
 ```
 
-#### Returning an NSFetchRequest
+#### NSFetchedResultsController
+\* iOS only
 
 ```swift
 let peopleRequest = Person.fetchAll(sortedBy: "entityID", ascending: true, delegate: self)
@@ -109,6 +123,7 @@ let peopleRequest = Person.fetchAll(byAttribute: "officeID", withInt64Value: 7, 
 ## Authors
 
 Maksym Skliarov https://github.com/skliarov
+
 Yura Voevodin https://github.com/yura-voevodin
 
 ## License
