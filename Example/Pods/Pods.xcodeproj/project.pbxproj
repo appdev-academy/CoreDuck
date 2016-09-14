@@ -825,6 +825,36 @@
 			};
 			name = Debug;
 		};
+		89EF9A0DF2FA855FB28B3170F1BB7FA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D68887B41D0F7A1CCD5AA9794ABAD9B /* CoreDuck-OSX.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CoreDuck-OSX/CoreDuck-OSX-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CoreDuck-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/CoreDuck-OSX/CoreDuck-OSX.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CoreDuck;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		A08748150C2BD28E88E4CCD015711A12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D28F6CFFBA83CCCD7C024469D383154 /* CoreDuck-iOS.xcconfig */;
@@ -855,7 +885,7 @@
 			};
 			name = Debug;
 		};
-		A1196306267F7D3D1DFE92F714AF7E08 /* Debug */ = {
+		D89464B36C16123395A8F6A3CA48D1F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D68887B41D0F7A1CCD5AA9794ABAD9B /* CoreDuck-OSX.xcconfig */;
 			buildSettings = {
@@ -874,7 +904,7 @@
 				INFOPLIST_FILE = "Target Support Files/CoreDuck-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = "Target Support Files/CoreDuck-OSX/CoreDuck-OSX.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = CoreDuck;
@@ -885,36 +915,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		B4B88354D57C2642FE8A5AE707C8E48C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D68887B41D0F7A1CCD5AA9794ABAD9B /* CoreDuck-OSX.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CoreDuck-OSX/CoreDuck-OSX-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CoreDuck-OSX/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MODULEMAP_FILE = "Target Support Files/CoreDuck-OSX/CoreDuck-OSX.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CoreDuck;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		F12981642CDE449E88EFA33BD3D13B39 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -995,8 +995,8 @@
 		7683176AF93C3E0ACA7C6B1B378D6C2D /* Build configuration list for PBXNativeTarget "CoreDuck-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A1196306267F7D3D1DFE92F714AF7E08 /* Debug */,
-				B4B88354D57C2642FE8A5AE707C8E48C /* Release */,
+				D89464B36C16123395A8F6A3CA48D1F9 /* Debug */,
+				89EF9A0DF2FA855FB28B3170F1BB7FA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

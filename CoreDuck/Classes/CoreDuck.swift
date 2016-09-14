@@ -98,7 +98,12 @@ public class CoreDuck {
                 coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
                 let url = self.applicationStoreDirectory.URLByAppendingPathComponent("CocoaAppCD.storedata")
                 do {
-                    try coordinator!.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: url, options: nil)
+                    // Migration options for persistent store
+                    let options = [
+                        NSMigratePersistentStoresAutomaticallyOption: true,
+                        NSInferMappingModelAutomaticallyOption: true
+                    ]
+                    try coordinator!.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: url, options: options)
                 } catch {
                     failError = error as NSError
                 }
