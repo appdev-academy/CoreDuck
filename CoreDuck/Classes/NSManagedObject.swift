@@ -110,7 +110,7 @@ public extension NSManagedObject {
         do {
             let count = try CoreDuck.quack.mainContext.count(for: request)
             return count
-        } catch let error as NSError {
+        } catch {
             return 0
         }
     }
@@ -1024,10 +1024,9 @@ public extension NSManagedObject {
         
         do {
             let results = try context.fetch(request)
-            if let objects = results as? NSArray {
-                if let first = objects.firstObject as? [String: Any] {
-                    return first[receiverName] as? NSNumber
-                }
+            let objects = results as NSArray
+            if let first = objects.firstObject as? [String: Any] {
+                return first[receiverName] as? NSNumber
             }
         } catch {
             
