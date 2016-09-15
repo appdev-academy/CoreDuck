@@ -35,17 +35,17 @@ public extension NSManagedObjectContext {
         - parameter block: execute block of code before save
         - parameter localContext: context to save
     */
-    static func saveWithBlock(block: (localContext: NSManagedObjectContext) -> Void, completion: (success: Bool) -> Void) {
+    static func saveWithBlock(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
         
         let backgroundContext = CoreDuck.quack.backgroundContext
         
-        backgroundContext.performBlock {
-            block(localContext: backgroundContext)
+        backgroundContext.perform {
+            block(backgroundContext)
             
             let success = CoreDuck.quack.saveContexts(contextWithObject: backgroundContext)
             
-            dispatch_async(dispatch_get_main_queue(), { 
-                completion(success: success)
+            DispatchQueue.main.async(execute: { 
+                completion(success)
             })
         }
     }
@@ -56,17 +56,17 @@ public extension NSManagedObjectContext {
         - parameter block: execute block of code before save
         - parameter localContext: context to save
     */
-    static func saveWithBlockAndWait(block: (localContext: NSManagedObjectContext) -> Void, completion: (success: Bool) -> Void) {
+    static func saveWithBlockAndWait(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
         
         let backgroundContext = CoreDuck.quack.backgroundContext
         
-        backgroundContext.performBlockAndWait {
-            block(localContext: backgroundContext)
+        backgroundContext.performAndWait {
+            block(backgroundContext)
             
             let success = CoreDuck.quack.saveContextsAndWait(contextWithObject: backgroundContext)
             
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(success: success)
+            DispatchQueue.main.async(execute: {
+                completion(success)
             })
         }
     }
