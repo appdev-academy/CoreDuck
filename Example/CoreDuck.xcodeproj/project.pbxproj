@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221EE48EA87D0635393B48E4 /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46441196ED22EDB82579417D /* Pods_CoreDuck_CoreDuck_macOS.framework */; };
+		1964DFAB4435B49870608B8C /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46441196ED22EDB82579417D /* Pods_CoreDuck_CoreDuck_macOS.framework */; };
 		3B57111E212CA922002146C8 /* Pods_CoreDuck_CoreDuck_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5268DC8D360741971570F0 /* Pods_CoreDuck_CoreDuck_Tests.framework */; };
 		43DB10B6BEA4ACFD1511E6E7 /* Pods_CoreDuck_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA927156898FEE33B80C055 /* Pods_CoreDuck_Tests.framework */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		60F8BFE44E661544E526706F /* Pods_CoreDuck_CoreDuck_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68D50ED0D0C4F5BC8D4344E /* Pods_CoreDuck_CoreDuck_iOS.framework */; };
-		647889868FF7D1400E436089 /* Pods_CoreDuck_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A4CF8851645E4504778F12 /* Pods_CoreDuck_Example.framework */; };
-		85D24303505D4113BA0ED8AB /* Pods_CoreDuck_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACAC448A5F6BB27235CE951 /* Pods_CoreDuck_macOS.framework */; };
-		B52C3B17AE9EAB3B3970BCD6 /* Pods_CoreDuck_Example_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0693265AE9A8714CAC815ADF /* Pods_CoreDuck_Example_macOS.framework */; };
 		DE3105781D8FB64500FC0742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3105701D8FB64500FC0742 /* AppDelegate.swift */; };
 		DE3105791D8FB64500FC0742 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE3105711D8FB64500FC0742 /* Assets.xcassets */; };
 		DE31057A1D8FB64500FC0742 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE3105721D8FB64500FC0742 /* Main.storyboard */; };
@@ -60,6 +57,7 @@
 		C661A16D5722D228D545E351 /* CoreDuck.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreDuck.podspec; path = ../CoreDuck.podspec; sourceTree = "<group>"; };
 		D68D50ED0D0C4F5BC8D4344E /* Pods_CoreDuck_CoreDuck_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_CoreDuck_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0980D21D587A6600C02F2E /* CoreDuck-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreDuck-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE184E5C1D8FCA32003FFB00 /* CoreDuck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDuck.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoreDuck-diqpuiluuwqjfpdzocqzbsuqkccw/Build/Products/Debug-iphonesimulator/CoreDuck-iOS/CoreDuck.framework"; sourceTree = "<group>"; };
 		DE3105701D8FB64500FC0742 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE3105711D8FB64500FC0742 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE3105731D8FB64500FC0742 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				647889868FF7D1400E436089 /* Pods_CoreDuck_Example.framework in Frameworks */,
 				60F8BFE44E661544E526706F /* Pods_CoreDuck_CoreDuck_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,9 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B52C3B17AE9EAB3B3970BCD6 /* Pods_CoreDuck_Example_macOS.framework in Frameworks */,
-				85D24303505D4113BA0ED8AB /* Pods_CoreDuck_macOS.framework in Frameworks */,
-				221EE48EA87D0635393B48E4 /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */,
+				1964DFAB4435B49870608B8C /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +168,7 @@
 		97C4A92F23083BF275347D59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE184E5C1D8FCA32003FFB00 /* CoreDuck.framework */,
 				95A4CF8851645E4504778F12 /* Pods_CoreDuck_Example.framework */,
 				2BA927156898FEE33B80C055 /* Pods_CoreDuck_Tests.framework */,
 				0693265AE9A8714CAC815ADF /* Pods_CoreDuck_Example_macOS.framework */,
@@ -314,8 +310,8 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* CoreDuck-iOS */,
-				607FACE41AFB9204008FA782 /* CoreDuck-Tests */,
 				DE0980D11D587A6600C02F2E /* CoreDuck-macOS */,
+				607FACE41AFB9204008FA782 /* CoreDuck-Tests */,
 			);
 		};
 /* End PBXProject section */
