@@ -5,7 +5,6 @@ abstract_target "CoreDuck" do
     
     target 'CoreDuck-iOS'
     target 'CoreDuck-macOS'
-    target 'CoreDuck-Tests'
     
     post_install do |installer|
         installer.pods_project.targets.each do |target|
