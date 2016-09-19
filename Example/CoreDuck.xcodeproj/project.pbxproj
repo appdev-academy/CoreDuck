@@ -207,9 +207,9 @@
 			children = (
 				DE3105701D8FB64500FC0742 /* AppDelegate.swift */,
 				DE3105711D8FB64500FC0742 /* Assets.xcassets */,
-				DE3105721D8FB64500FC0742 /* Main.storyboard */,
 				DE3105741D8FB64500FC0742 /* CoreData.xcdatamodeld */,
 				DE3105761D8FB64500FC0742 /* Info.plist */,
+				DE3105721D8FB64500FC0742 /* Main.storyboard */,
 				DE3105771D8FB64500FC0742 /* ViewController.swift */,
 			);
 			path = "CoreDuck-macOS";
@@ -219,11 +219,11 @@
 			isa = PBXGroup;
 			children = (
 				DE31057F1D8FB75D00FC0742 /* AppDelegate.swift */,
-				DE3105801D8FB75D00FC0742 /* LaunchScreen.xib */,
-				DE3105821D8FB75D00FC0742 /* Main.storyboard */,
 				DE3105841D8FB75D00FC0742 /* CoreData.xcdatamodeld */,
 				DE3105861D8FB75D00FC0742 /* Images.xcassets */,
 				DE3105871D8FB75D00FC0742 /* Info.plist */,
+				DE3105801D8FB75D00FC0742 /* LaunchScreen.xib */,
+				DE3105821D8FB75D00FC0742 /* Main.storyboard */,
 				DE3105881D8FB75D00FC0742 /* ViewController.swift */,
 			);
 			path = "CoreDuck-iOS";
