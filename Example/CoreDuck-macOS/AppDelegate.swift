@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         // Initialize CoreData stack
-        CoreDuck.quack
+        let _ = CoreDuck.quack
         
         // Access main NSManagedContext
         let _ = CoreDuck.quack.mainContext
