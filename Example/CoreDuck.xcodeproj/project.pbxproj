@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B4C54D5034FC722DA865DDA /* Pods_CoreDuck_CoreDuck_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB410FA9118016CC9A8C7C1 /* Pods_CoreDuck_CoreDuck_iOS.framework */; };
+		B574B6A7E32DD48072C540CC /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9AE210CB0B9A345F35EC12 /* Pods_CoreDuck_CoreDuck_macOS.framework */; };
 		DE3105781D8FB64500FC0742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3105701D8FB64500FC0742 /* AppDelegate.swift */; };
 		DE3105791D8FB64500FC0742 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE3105711D8FB64500FC0742 /* Assets.xcassets */; };
 		DE31057A1D8FB64500FC0742 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE3105721D8FB64500FC0742 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		633D0F848F75C7045E52CA44 /* Pods-CoreDuck-CoreDuck-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck-CoreDuck-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck-CoreDuck-macOS/Pods-CoreDuck-CoreDuck-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		850B75B40AB36A8973E2E595 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9C1941763117DDC0C5523DAF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		9CB410FA9118016CC9A8C7C1 /* Pods_CoreDuck_CoreDuck_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_CoreDuck_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F9AE210CB0B9A345F35EC12 /* Pods_CoreDuck_CoreDuck_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_CoreDuck_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF432320751730805DC5D9B0 /* Pods-CoreDuck-CoreDuck-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck-CoreDuck-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck-CoreDuck-macOS/Pods-CoreDuck-CoreDuck-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		C661A16D5722D228D545E351 /* CoreDuck.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreDuck.podspec; path = ../CoreDuck.podspec; sourceTree = "<group>"; };
 		DE0980D21D587A6600C02F2E /* CoreDuck-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreDuck-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4C54D5034FC722DA865DDA /* Pods_CoreDuck_CoreDuck_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B574B6A7E32DD48072C540CC /* Pods_CoreDuck_CoreDuck_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				DE184E5C1D8FCA32003FFB00 /* CoreDuck.framework */,
+				9CB410FA9118016CC9A8C7C1 /* Pods_CoreDuck_CoreDuck_iOS.framework */,
+				9F9AE210CB0B9A345F35EC12 /* Pods_CoreDuck_CoreDuck_macOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
