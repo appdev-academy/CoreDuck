@@ -14,10 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         // Initialize CoreData stack
-        CoreDuck.quack
+        let _ = CoreDuck.quack
         
         // Access main NSManagedContext
         let _ = CoreDuck.quack.mainContext
@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         })
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
