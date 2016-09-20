@@ -122,9 +122,8 @@ let peopleRequest = Person.fetchAll(byAttribute: "officeID", withInt64Value: 7, 
 
 ## Authors
 
-Maksym Skliarov https://github.com/skliarov
-
-Yura Voevodin https://github.com/yura-voevodin
+- Maksym Skliarov https://github.com/skliarov
+- Yura Voevodin https://github.com/yura-voevodin
 
 ## License
 
