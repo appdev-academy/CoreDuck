@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "CoreDuck_Example.app"
-               BlueprintName = "CoreDuck_Example"
+               BuildableName = "CoreDuck-iOS.app"
+               BlueprintName = "CoreDuck-iOS"
                ReferencedContainer = "container:CoreDuck.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "CoreDuck_Tests.xctest"
-               BlueprintName = "CoreDuck_Tests"
+               BuildableName = "CoreDuck-Tests.xctest"
+               BlueprintName = "CoreDuck-Tests"
                ReferencedContainer = "container:CoreDuck.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "CoreDuck_Tests.xctest"
-               BlueprintName = "CoreDuck_Tests"
+               BuildableName = "CoreDuck-Tests.xctest"
+               BlueprintName = "CoreDuck-Tests"
                ReferencedContainer = "container:CoreDuck.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CoreDuck_Example.app"
-            BlueprintName = "CoreDuck_Example"
+            BuildableName = "CoreDuck-iOS.app"
+            BlueprintName = "CoreDuck-iOS"
             ReferencedContainer = "container:CoreDuck.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CoreDuck_Example.app"
-            BlueprintName = "CoreDuck_Example"
+            BuildableName = "CoreDuck-iOS.app"
+            BlueprintName = "CoreDuck-iOS"
             ReferencedContainer = "container:CoreDuck.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -99,8 +99,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CoreDuck_Example.app"
-            BlueprintName = "CoreDuck_Example"
+            BuildableName = "CoreDuck-iOS.app"
+            BlueprintName = "CoreDuck-iOS"
             ReferencedContainer = "container:CoreDuck.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
