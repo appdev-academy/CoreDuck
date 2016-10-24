@@ -18,7 +18,7 @@ public extension NSManagedObject {
     */
     static var entityName: String {
         get {
-            return String(self)
+            return String(describing: self)
         }
     }
     
@@ -31,7 +31,7 @@ public extension NSManagedObject {
     */
     static func new(inContext context: NSManagedObjectContext) -> NSManagedObject {
         
-        return NSEntityDescription.insertNewObjectForEntityForName(self.entityName, inManagedObjectContext: context)
+        return NSEntityDescription.insertNewObject(forEntityName: self.entityName, into: context)
     }
     
     /**
@@ -39,18 +39,18 @@ public extension NSManagedObject {
      
         - parameter context: context to move
     */
-    func inContext(context: NSManagedObjectContext) -> NSManagedObject? {
+    func inContext(_ context: NSManagedObjectContext) -> NSManagedObject? {
         
-        if self.objectID.temporaryID {
+        if self.objectID.isTemporaryID {
             do {
-                try self.managedObjectContext?.obtainPermanentIDsForObjects([self])
+                try self.managedObjectContext?.obtainPermanentIDs(for: [self])
             } catch {
                 return nil
             }
         }
         
         do {
-            let objectInNewContext = try context.existingObjectWithID(objectID)
+            let objectInNewContext = try context.existingObject(with: objectID)
             return objectInNewContext
         } catch {
             return nil
@@ -65,21 +65,21 @@ public extension NSManagedObject {
     static func deleteAllObjects() {
         
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         NSManagedObjectContext.saveWithBlock({
             localContext in
             
             do {
-                let result = try localContext.executeFetchRequest(fetchRequest)
+                let result = try localContext.fetch(request)
                 
                 if let objectsToDelete = result as? [NSManagedObject] {
                     
                     for object in objectsToDelete {
                         
                         do {
-                            let objectInContext = try localContext.existingObjectWithID(object.objectID)
-                            localContext.deleteObject(objectInContext)
+                            let objectInContext = try localContext.existingObject(with: object.objectID)
+                            localContext.delete(objectInContext)
                             
                         } catch {
                             
@@ -104,12 +104,15 @@ public extension NSManagedObject {
     */
     static func countOfEntities(withPredicate predicate: NSPredicate) -> Int {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
-        fetchRequest.predicate = predicate
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
+        request.predicate = predicate
         
-        let count = CoreDuck.quack.mainContext.countForFetchRequest(fetchRequest, error: nil)
-        
-        return count
+        do {
+            let count = try CoreDuck.quack.mainContext.count(for: request)
+            return count
+        } catch {
+            return 0
+        }
     }
     
     // MARK: - findFirst with predicate
@@ -122,11 +125,11 @@ public extension NSManagedObject {
     */
     static func findFirst(withPredicate predicate: NSPredicate, inContext context: NSManagedObjectContext) -> NSManagedObject? {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
-        fetchRequest.predicate = predicate
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
+        request.predicate = predicate
         
         do {
-            let results = try context.executeFetchRequest(fetchRequest)
+            let results = try context.fetch(request)
             
             if let object = results.first as? NSManagedObject  {
                 
@@ -303,16 +306,16 @@ public extension NSManagedObject {
         - parameter sortedBy: column name to sort by
         - parameter ascending: direction to sort by
     */
-    static func findFirst(sortedBy sortedBy: String, ascending: Bool) -> NSManagedObject? {
+    static func findFirst(sortedBy: String, ascending: Bool) -> NSManagedObject? {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.fetch(request)
             
             if let object = results.first as? NSManagedObject  {
                 return object
@@ -473,10 +476,10 @@ public extension NSManagedObject {
     */
     static func findAll(inContext context: NSManagedObjectContext) -> [NSManagedObject] {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         do {
-            let results = try context.executeFetchRequest(fetchRequest)
+            let results = try context.fetch(request)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -496,11 +499,11 @@ public extension NSManagedObject {
     */
     static func findAll(withPredicate predicate: NSPredicate) -> [NSManagedObject] {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
-        fetchRequest.predicate = predicate
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
+        request.predicate = predicate
         
         do {
-            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.fetch(request)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -519,16 +522,16 @@ public extension NSManagedObject {
         - parameter sortedBy: column name to sort by
         - parameter ascending: direction to sort by
     */
-    static func findAll(sortedBy sortedBy: String, ascending: Bool) -> [NSManagedObject] {
+    static func findAll(sortedBy: String, ascending: Bool) -> [NSManagedObject] {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.fetch(request)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -548,17 +551,17 @@ public extension NSManagedObject {
         - parameter ascending: direction to sort by
         - parameter withPredicate: predicate for search
     */
-    static func findAll(sortedBy sortedBy: String, ascending: Bool, withPredicate predicate: NSPredicate) -> [NSManagedObject] {
+    static func findAll(sortedBy: String, ascending: Bool, withPredicate predicate: NSPredicate) -> [NSManagedObject] {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
-        fetchRequest.predicate = predicate
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
+        request.predicate = predicate
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDuck.quack.mainContext.executeFetchRequest(fetchRequest)
+            let results = try CoreDuck.quack.mainContext.fetch(request)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -579,12 +582,12 @@ public extension NSManagedObject {
     */
     static func findAll(withPredicate predicate: NSPredicate, inContext context: NSManagedObjectContext) -> [NSManagedObject] {
         
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
-        fetchRequest.predicate = predicate
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
+        request.predicate = predicate
         
         do {
             
-            let results = try context.executeFetchRequest(fetchRequest)
+            let results = try context.fetch(request)
             
             if let fetchedArray = results as? [NSManagedObject] {
                 return fetchedArray
@@ -892,17 +895,18 @@ public extension NSManagedObject {
         - parameter inContext: context for search
         - parameter delegate: NSFetchedResultsControllerDelegate
     */
-    static func fetchAll(sortedBy sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController {
+    static func fetchAll<T>(sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
         
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+    
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDuck.quack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDuck.quack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Set delegate
         fetchedResultsController.delegate = delegate
@@ -915,7 +919,7 @@ public extension NSManagedObject {
         }
         
         // Return NSFetchedResultsController
-        return fetchedResultsController
+        return fetchedResultsController as? NSFetchedResultsController<T>
     }
     
     #endif
@@ -931,20 +935,20 @@ public extension NSManagedObject {
         - parameter inContext: context for search
         - parameter delegate: NSFetchedResultsControllerDelegate
     */
-    static func fetchAll(withPredicate predicate: NSPredicate, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController {
+    static func fetchAll<T>(withPredicate predicate: NSPredicate, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
         
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: sortBy, ascending: ascending)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = [sortDescriptor]
         
         // Add Predicate
-        fetchRequest.predicate = predicate
+        request.predicate = predicate
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
        
         // Set delegate
         fetchedResultsController.delegate = delegate
@@ -957,7 +961,7 @@ public extension NSManagedObject {
         }
         
         // Return NSFetchedResultsController
-        return fetchedResultsController
+        return fetchedResultsController as? NSFetchedResultsController<T>
     }
     
     #endif
@@ -976,7 +980,7 @@ public extension NSManagedObject {
         - parameter inContext: context for search
         - parameter delegate: NSFetchedResultsControllerDelegate
     */
-    static func fetchAll(byAttribute attribute: String, withInt64Value value: Int64, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController? {
+    static func fetchAll<T>(byAttribute attribute: String, withInt64Value value: Int64, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
         
         // Build predicate with value
         let predicate = NSPredicate(format: "\(attribute) = \(value)")
@@ -999,13 +1003,13 @@ public extension NSManagedObject {
     static func sum(onAttribute attribute: String, withPredicate predicate: NSPredicate, inContext context: NSManagedObjectContext) -> NSNumber? {
         
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: self.entityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: self.entityName)
         
         // Add Predicate
-        fetchRequest.predicate = predicate
+        request.predicate = predicate
         
         // Set result type
-        fetchRequest.resultType = .DictionaryResultType
+        request.resultType = .dictionaryResultType
         
         let receiverName = "total"
         
@@ -1014,15 +1018,15 @@ public extension NSManagedObject {
         let calc = NSExpressionDescription()
         calc.name = receiverName
         calc.expression = NSExpression(forFunction: "sum:", arguments: [keyPath])
-        calc.expressionResultType = .DoubleAttributeType
+        calc.expressionResultType = .doubleAttributeType
         
-        fetchRequest.propertiesToFetch = [calc]
+        request.propertiesToFetch = [calc]
         
         do {
-            let results = try context.executeFetchRequest(fetchRequest) as NSArray
-            
-            if let sum = results[0][receiverName] {
-                return sum as? NSNumber
+            let results = try context.fetch(request)
+            let objects = results as NSArray
+            if let first = objects.firstObject as? [String: Any] {
+                return first[receiverName] as? NSNumber
             }
         } catch {
             

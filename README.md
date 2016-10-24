@@ -13,7 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 - iOS 8.0+
 - macOS 10.10+
-- Swift 2.2+
+- Swift 3.0+
 
 ## Installation
 
@@ -122,9 +122,8 @@ let peopleRequest = Person.fetchAll(byAttribute: "officeID", withInt64Value: 7, 
 
 ## Authors
 
-Maksym Skliarov https://github.com/skliarov
-
-Yura Voevodin https://github.com/yura-voevodin
+- Maksym Skliarov https://github.com/skliarov
+- Yura Voevodin https://github.com/yura-voevodin
 
 ## License
 
