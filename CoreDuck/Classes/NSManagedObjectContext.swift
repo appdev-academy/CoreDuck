@@ -11,33 +11,27 @@ import CoreData
 
 public extension NSManagedObjectContext {
   
-  /**
-   Main NSManagedObjectContext of the app
-   You can use it safely with UIKit, works on the main thread of the app
-   It's a singleton - always returns the smae instance
-   */
+  /// Main NSManagedObjectContext of the app.
+  /// You can use it safely with UIKit, works on the main thread of the app.
+  /// It's a singleton - always returns the smae instance.
   public static var mainContext: NSManagedObjectContext {
     return CoreDuck.quack.mainContext
   }
   
-  /**
-   Background NSManagedObjectContext.
-   Returns new instance of NSManagedObjectContext each time you access this variable
-   Perfect application of bacground context - asynchronous import of data into CoreData
-   */
+  /// Background NSManagedObjectContext.
+  /// Returns new instance of NSManagedObjectContext each time you access this variable.
+  /// Perfect application of bacground context - asynchronous import of data into CoreData.
   public static var backgroundContext: NSManagedObjectContext {
     return CoreDuck.quack.backgroundContext
   }
   
-  /**
-   Save NSManagedObjectContext
-   
-   - parameter block: execute block of code before save
-   - parameter localContext: context to save
-   */
+  /// Save NSManagedObjectContext
+  ///
+  /// - Parameters:
+  ///   - block: execute block of code before save
+  ///   - completion: context to save
   static func saveWithBlock(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
-    
-    let backgroundContext = CoreDuck.quack.backgroundContext
+    let backgroundContext = NSManagedObjectContext.backgroundContext
     
     backgroundContext.perform {
       block(backgroundContext)
@@ -50,15 +44,13 @@ public extension NSManagedObjectContext {
     }
   }
   
-  /**
-   Save NSManagedObjectContext and wait
-   
-   - parameter block: execute block of code before save
-   - parameter localContext: context to save
-   */
+  /// Save NSManagedObjectContext and wait
+  ///
+  /// - Parameters:
+  ///   - block: execute block of code before save
+  ///   - completion: context to save
   static func saveWithBlockAndWait(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
-    
-    let backgroundContext = CoreDuck.quack.backgroundContext
+    let backgroundContext = NSManagedObjectContext.backgroundContext
     
     backgroundContext.performAndWait {
       block(backgroundContext)

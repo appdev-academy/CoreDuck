@@ -628,6 +628,44 @@ public extension NSManagedObject {
     }
   }
   
+  /// Fetch all objects with predicate and sort descriptors and sections in context
+  ///
+  /// - Parameters:
+  ///   - predicate: NSPredicate for search
+  ///   - sortDescriptors: The sort descriptors of the fetch request.
+  ///   - sectionNameKeyPath: A key path on result objects that returns the section name.
+  ///   - delegate: The object that is notified when the fetched results changed.
+  ///   - context: The managed object against which fetchRequest is executed.
+  /// - Returns: NSFetchedResultsController
+  @available(OSX 10.12, *)
+  static func fetchAll<T: NSManagedObject>(with predicate: NSPredicate, sortDescriptors: [NSSortDescriptor], sectionNameKeyPath: String? = nil, delegate: NSFetchedResultsControllerDelegate, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> NSFetchedResultsController<T>? {
+    let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
+    
+    // Sort Descriptors
+    request.sortDescriptors = sortDescriptors
+    
+    // Add Predicate
+    request.predicate = predicate
+    
+    // Initialize Fetched Results Controller
+    let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
+    
+    // Set delegate
+    fetchedResultsController.delegate = delegate
+    
+    // Try to perform fetch request
+    do {
+      try fetchedResultsController.performFetch()
+      return fetchedResultsController
+      
+    } catch {
+      if CoreDuck.printErrors {
+        print("⚠️ failed to fetch request for " + entityName)
+      }
+      return nil
+    }
+  }
+  
   // MARK: - fetchAll by attribute in context
   
   /// Fetch all objects by attribute in context

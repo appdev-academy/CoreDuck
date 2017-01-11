@@ -9,17 +9,14 @@ import CoreData
 
 open class CoreDuck {
   
-  /**
-   Singleton instance of CoreData stack
-   */
+  /// Singleton instance of CoreData stack
   open static let quack = CoreDuck()
-  
-  /**
-   Set to true to print NSManagedObjectContext save errors to console
-   */
+
+  /// Set to true to print NSManagedObjectContext save errors to console
   open static var printErrors: Bool = false
   
-  fileprivate var coreDataModelName = "CoreData"
+  /// Name of *.xcdatamodel file
+  open static var coreDataModelName = "CoreData"
   
   init() {
     let _ = self.mainContext
@@ -41,7 +38,7 @@ open class CoreDuck {
   
   fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
     // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-    let modelURL = Bundle.main.url(forResource: self.coreDataModelName, withExtension: "momd")!
+    let modelURL = Bundle.main.url(forResource: CoreDuck.coreDataModelName, withExtension: "momd")!
     return NSManagedObjectModel(contentsOf: modelURL)!
   }()
   
@@ -126,41 +123,31 @@ open class CoreDuck {
     #endif
   }()
   
-  /**
-   NSManagedObjectContext for writing data to persistent store
-   */
+  /// NSManagedObjectContext for private queue with privateQueueConcurrencyType
   lazy var writingContext: NSManagedObjectContext = {
-    let coordinator = self.persistentStoreCoordinator
-    let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    managedObjectContext.persistentStoreCoordinator = coordinator
-    return managedObjectContext
+    let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+    context.persistentStoreCoordinator = self.persistentStoreCoordinator
+    return context
   }()
   
-  /**
-   NSManagedObjectContext for main thread usage
-   */
+  /// NSManagedObjectContext for main queue with mainQueueConcurrencyType
   open lazy var mainContext: NSManagedObjectContext = {
-    let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    managedObjectContext.parent = self.writingContext
-    return managedObjectContext
+    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    context.parent = self.writingContext
+    return context
   }()
   
-  /**
-   NSManagedObjectContext for background usage
-   */
+  /// NSManagedObjectContext for private queue with privateQueueConcurrencyType
   open var backgroundContext: NSManagedObjectContext {
-    get {
-      let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-      managedObjectContext.parent = self.mainContext
-      return managedObjectContext
-    }
+    let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+    context.parent = self.mainContext
+    return context
   }
   
-  /**
-   Save all contexts
-   
-   - parameter contextWithObject receivedContext: object added to this context
-   */
+  /// Save all contexts
+  ///
+  /// - Parameter receivedContext: object added to this context
+  /// - Returns: true or false
   func saveContexts(contextWithObject receivedContext: NSManagedObjectContext) -> Bool {
     
     var success = true
@@ -182,7 +169,7 @@ open class CoreDuck {
               } catch let error as NSError {
                 // Writing NSManagedObjectContext save error
                 if CoreDuck.printErrors {
-                  print("Writing NSManagedObjectContext save error:", error.userInfo)
+                  print("⚠️ Writing NSManagedObjectContext save error:", error.userInfo)
                 }
                 
                 success = false
@@ -191,7 +178,7 @@ open class CoreDuck {
           } catch let error as NSError {
             // Main NSManagedObjectContext save error
             if CoreDuck.printErrors {
-              print("Main NSManagedObjectContext save error:", error.userInfo)
+              print("⚠️ Main NSManagedObjectContext save error:", error.userInfo)
             }
             
             success = false
@@ -200,7 +187,7 @@ open class CoreDuck {
       } catch let error as NSError {
         // Background NSManagedObjectContext save error
         if CoreDuck.printErrors {
-          print("Background NSManagedObjectContext save error:", error.userInfo)
+          print("⚠️ Background NSManagedObjectContext save error:", error.userInfo)
         }
         
         success = false
@@ -209,11 +196,10 @@ open class CoreDuck {
     return success
   }
   
-  /**
-   Save all contexts
-   
-   - parameter contextWithObject receivedContext: object added to this context
-   */
+  /// Save all contexts and wait
+  ///
+  /// - Parameter receivedContext: object added to this context
+  /// - Returns: true or false
   func saveContextsAndWait(contextWithObject receivedContext: NSManagedObjectContext) -> Bool {
     
     var success = true
@@ -235,7 +221,7 @@ open class CoreDuck {
               } catch let error as NSError {
                 // Writing NSManagedObjectContext save error
                 if CoreDuck.printErrors {
-                  print("Writing NSManagedObjectContext save error:", error.userInfo)
+                  print("⚠️ Writing NSManagedObjectContext save error:", error.userInfo)
                 }
                 
                 success = false
@@ -244,7 +230,7 @@ open class CoreDuck {
           } catch let error as NSError {
             // Main NSManagedObjectContext save error
             if CoreDuck.printErrors {
-              print("Main NSManagedObjectContext save error:", error.userInfo)
+              print("⚠️ Main NSManagedObjectContext save error:", error.userInfo)
             }
             
             success = false
@@ -253,7 +239,7 @@ open class CoreDuck {
       } catch let error as NSError {
         // Background NSManagedObjectContext save error
         if CoreDuck.printErrors {
-          print("Background NSManagedObjectContext save error:", error.userInfo)
+          print("⚠️ Background NSManagedObjectContext save error:", error.userInfo)
         }
         
         success = false
