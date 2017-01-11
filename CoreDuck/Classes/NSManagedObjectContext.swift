@@ -12,7 +12,7 @@ import CoreData
 public extension NSManagedObjectContext {
   
   /// Main NSManagedObjectContext of the app.
-  /// You can use it safely with UIKit, works on the main thread of the app.
+  /// Primary usage is UIKit, works on the main thread of the app.
   /// It's a singleton - always returns the same instance.
   public static var mainContext: NSManagedObjectContext {
     return CoreDuck.quack.mainContext
@@ -20,7 +20,7 @@ public extension NSManagedObjectContext {
   
   /// Background NSManagedObjectContext.
   /// Returns new instance of NSManagedObjectContext each time you access this variable.
-  /// Perfect application of bacground context - asynchronous import of data into CoreData.
+  /// Use it for persisting changes to CoreData.
   public static var backgroundContext: NSManagedObjectContext {
     return CoreDuck.quack.backgroundContext
   }
@@ -28,8 +28,8 @@ public extension NSManagedObjectContext {
   /// Save NSManagedObjectContext
   ///
   /// - Parameters:
-  ///   - block: execute block of code before save
-  ///   - completion: context to save
+  ///   - block: closure invoked before saving NSManagedObjectContext, perform changes on NSManagedObject instances here
+  ///   - completion: closure that will be executed after save operation is finished
   static func saveWithBlock(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
     let backgroundContext = NSManagedObjectContext.backgroundContext
     
@@ -47,8 +47,8 @@ public extension NSManagedObjectContext {
   /// Save NSManagedObjectContext and wait
   ///
   /// - Parameters:
-  ///   - block: execute block of code before save
-  ///   - completion: context to save
+  ///   - block: closure invoked before saving NSManagedObjectContext, perform changes on NSManagedObject instances here
+  ///   - completion: closure that will be executed after save operation is finished
   static func saveWithBlockAndWait(_ block: @escaping (_ localContext: NSManagedObjectContext) -> Void, completion: @escaping (_ success: Bool) -> Void) {
     let backgroundContext = NSManagedObjectContext.backgroundContext
     
