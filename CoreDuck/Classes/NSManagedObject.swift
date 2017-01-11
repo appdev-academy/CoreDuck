@@ -883,8 +883,6 @@ public extension NSManagedObject {
     return self.findAll(withPredicate: predicate)
   }
   
-  #if os(iOS)
-  
   // MARK: - NSFetchedResultsController functions
   
   /**
@@ -895,6 +893,7 @@ public extension NSManagedObject {
    - parameter inContext: context for search
    - parameter delegate: NSFetchedResultsControllerDelegate
    */
+  @available(OSX 10.12, *)
   static func fetchAll<T>(sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     
     // Initialize Fetch Request
@@ -922,10 +921,6 @@ public extension NSManagedObject {
     return fetchedResultsController as? NSFetchedResultsController<T>
   }
   
-  #endif
-  
-  #if os(iOS)
-  
   /**
    Fetch all objects with predicate in context
    
@@ -935,6 +930,7 @@ public extension NSManagedObject {
    - parameter inContext: context for search
    - parameter delegate: NSFetchedResultsControllerDelegate
    */
+  @available(OSX 10.12, *)
   static func fetchAll<T>(withPredicate predicate: NSPredicate, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     
     // Initialize Fetch Request
@@ -964,10 +960,6 @@ public extension NSManagedObject {
     return fetchedResultsController as? NSFetchedResultsController<T>
   }
   
-  #endif
-  
-  #if os(iOS)
-  
   // MARK: - fetchAll by attribute in context
   
   /**
@@ -980,6 +972,7 @@ public extension NSManagedObject {
    - parameter inContext: context for search
    - parameter delegate: NSFetchedResultsControllerDelegate
    */
+  @available(OSX 10.12, *)
   static func fetchAll<T>(byAttribute attribute: String, withInt64Value value: Int64, sortBy: String, ascending: Bool, inContext context: NSManagedObjectContext, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     
     // Build predicate with value
@@ -988,8 +981,6 @@ public extension NSManagedObject {
     // Fetch and return data
     return self.fetchAll(withPredicate: predicate, sortBy: sortBy, ascending: ascending, inContext: context, delegate: delegate)
   }
-  
-  #endif
   
   // MARK: - Aggregate functions
   
