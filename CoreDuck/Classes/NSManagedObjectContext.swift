@@ -13,7 +13,7 @@ public extension NSManagedObjectContext {
   
   /// Main NSManagedObjectContext of the app.
   /// You can use it safely with UIKit, works on the main thread of the app.
-  /// It's a singleton - always returns the smae instance.
+  /// It's a singleton - always returns the same instance.
   public static var mainContext: NSManagedObjectContext {
     return CoreDuck.quack.mainContext
   }
