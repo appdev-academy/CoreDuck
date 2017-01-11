@@ -199,11 +199,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = CBGX48BZ8F;
 						LastSwiftMigration = 0800;
 					};
 					DE0980D11D587A6600C02F2E = {
@@ -490,9 +491,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48957E15FA2DB048C68C10C4 /* Pods-CoreDuck-CoreDuck-iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = CBGX48BZ8F;
 				INFOPLIST_FILE = "$(SRCROOT)/CoreDuck-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -507,9 +510,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 461D1E5D2EE4B020B534E3DB /* Pods-CoreDuck-CoreDuck-iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = CBGX48BZ8F;
 				INFOPLIST_FILE = "$(SRCROOT)/CoreDuck-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -524,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 633D0F848F75C7045E52CA44 /* Pods-CoreDuck-CoreDuck-macOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -542,6 +548,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF432320751730805DC5D9B0 /* Pods-CoreDuck-CoreDuck-macOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "-";
