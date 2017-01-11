@@ -63,18 +63,18 @@ public extension NSManagedObject {
         }
         
         for object in objectsToDelete {
-          object.delete(objectInContext)
+          localContext.delete(object)
         }
       } catch {
         if CoreDuck.printErrors {
           print("⚠️ error while fetching objects")
         }
       }
-    }) { success in
+    }, completion: { success in
       if !success && CoreDuck.printErrors {
         print("⚠️ failed to delete objects")
       }
-    }
+    })
   }
   
   /// Get count of entities
