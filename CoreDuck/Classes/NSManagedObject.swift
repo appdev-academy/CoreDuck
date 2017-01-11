@@ -20,30 +20,24 @@ public extension NSManagedObject {
   
   // MARK: - Helpers
   
-  /// Create new NSManagedObject in context
-  ///
-  /// - Parameter context: context to insert new NSManagedObject instance
-  /// - Returns: new NSManagedObject instance inserted into specified context
-  static func new<T: NSManagedObject>(in context: NSManagedObjectContext) -> T? {
-    return NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? T
-  }
-  
   /// Get reference to NSManagedObject instance in different context
   ///
   /// - Parameter context: context to access NSManagedObject instance in
   /// - Returns: NSManagedObject instance in different context
-  func inContext<T: NSManagedObject>(_ context: NSManagedObjectContext) -> T? {
+  func inContext(_ context: NSManagedObjectContext) -> NSManagedObject? {
     if objectID.isTemporaryID {
       do {
         try managedObjectContext?.obtainPermanentIDs(for: [self])
       } catch {
+        CoreDuck.printError("Error while obtain object in context \(error.localizedDescription)")
         return nil
       }
     }
     
     do {
-      return try context.existingObject(with: objectID) as? T
+      return try context.existingObject(with: objectID)
     } catch {
+      CoreDuck.printError("Error while getting existing object in context \(error.localizedDescription)")
       return nil
     }
   }
@@ -56,9 +50,7 @@ public extension NSManagedObject {
       do {
         let result = try localContext.fetch(request)
         guard let objectsToDelete = result as? [NSManagedObject] else {
-          if CoreDuck.printErrors {
-            print("⚠️ error while fetching objects")
-          }
+          CoreDuck.printError("Error while fetching objects")
           return
         }
         
@@ -66,65 +58,13 @@ public extension NSManagedObject {
           localContext.delete(object)
         }
       } catch {
-        if CoreDuck.printErrors {
-          print("⚠️ error while fetching objects")
-        }
+        CoreDuck.printError("Error while fetching objects \(error.localizedDescription)")
       }
     }, completion: { success in
-      if !success && CoreDuck.printErrors {
-        print("⚠️ failed to delete objects")
+      if !success {
+        CoreDuck.printError("Failed to delete objects")
       }
     })
-  }
-  
-  /// Get count of entities
-  ///
-  /// - Parameter predicate: predicate for search
-  /// - Returns: count of entities
-  static func countOfEntities(withPredicate predicate: NSPredicate) -> Int {
-    let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
-    request.predicate = predicate
-    
-    do {
-      return try NSManagedObjectContext.mainContext.count(for: request)
-    } catch {
-      if CoreDuck.printErrors {
-        print("⚠️ failed to get count of " + entityName)
-      }
-      return 0
-    }
-  }
-  
-  // MARK: - findFirst with predicate
-  
-  /// Find first object with predicate in context
-  ///
-  /// - Parameters:
-  ///   - predicate: predicate for search
-  ///   - context: context to search in
-  /// - Returns: NSManagedObject instance or nil
-  static func findFirst<T: NSManagedObject>(with predicate: NSPredicate, in context: NSManagedObjectContext) -> T? {
-    let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
-    request.predicate = predicate
-    
-    do {
-      let results = try context.fetch(request)
-      return results.first
-      
-    } catch {
-      if CoreDuck.printErrors {
-        print("⚠️ failed to fetch first object of " + entityName)
-      }
-      return nil
-    }
-  }
-  
-  /// Find first object with predicate (in main context)
-  ///
-  /// - Parameter predicate: predicate for search
-  /// - Returns: object or nil
-  static func findFirst<T: NSManagedObject>(with predicate: NSPredicate) -> T? {
-    return findFirst(with: predicate, in: NSManagedObjectContext.mainContext)
   }
   
   // MARK: - findFirst by attribute in context
