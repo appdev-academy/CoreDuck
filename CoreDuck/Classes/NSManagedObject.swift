@@ -13,30 +13,29 @@ public extension NSManagedObject {
   
   // MARK: - Variables
   
-  /// Name of NSManagedObject entity
+  /// NSManagedObject's subclass name
   static var entityName: String {
     return String(describing: self)
   }
   
   // MARK: - Helpers
   
-  /// New NSManagedObject in context
+  /// Create new NSManagedObject in context
   ///
-  /// - Parameter context: context for object
-  /// - Returns: new object in context
+  /// - Parameter context: context to insert new NSManagedObject instance
+  /// - Returns: new NSManagedObject instance inserted into specified context
   static func new<T: NSManagedObject>(in context: NSManagedObjectContext) -> T? {
     return NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? T
   }
   
-  /// Move NSManagedObject to another context
+  /// Get reference to NSManagedObject instance in different context
   ///
-  /// - Parameter context: context to move
-  /// - Returns: object in new context
+  /// - Parameter context: context to access NSManagedObject instance in
+  /// - Returns: NSManagedObject instance in different context
   func inContext<T: NSManagedObject>(_ context: NSManagedObjectContext) -> T? {
     if objectID.isTemporaryID {
       do {
         try managedObjectContext?.obtainPermanentIDs(for: [self])
-        
       } catch {
         return nil
       }
@@ -44,42 +43,33 @@ public extension NSManagedObject {
     
     do {
       return try context.existingObject(with: objectID) as? T
-      
     } catch {
       return nil
     }
   }
   
-  /// Truncate all data from Entity in context
+  /// Delete all NSManagedObject subclass instances
   static func deleteAllObjects() {
     let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
     
     NSManagedObjectContext.saveWithBlock({ localContext in
       do {
         let result = try localContext.fetch(request)
-        
-        if let objectsToDelete = result as? [NSManagedObject] {
-          
-          for object in objectsToDelete {
-            
-            do {
-              let objectInContext = try localContext.existingObject(with: object.objectID)
-              localContext.delete(objectInContext)
-              
-            } catch {
-              if CoreDuck.printErrors {
-                print("⚠️ error while deleting object in context")
-              }
-            }
+        guard let objectsToDelete = result as? [NSManagedObject] else {
+          if CoreDuck.printErrors {
+            print("⚠️ error while fetching objects")
           }
+          return
         }
         
+        for object in objectsToDelete {
+          object.delete(objectInContext)
+        }
       } catch {
         if CoreDuck.printErrors {
-          print("⚠️ error while fetching request")
+          print("⚠️ error while fetching objects")
         }
       }
-      
     }) { success in
       if !success && CoreDuck.printErrors {
         print("⚠️ failed to delete objects")
@@ -97,7 +87,6 @@ public extension NSManagedObject {
     
     do {
       return try NSManagedObjectContext.mainContext.count(for: request)
-      
     } catch {
       if CoreDuck.printErrors {
         print("⚠️ failed to get count of " + entityName)
@@ -112,8 +101,8 @@ public extension NSManagedObject {
   ///
   /// - Parameters:
   ///   - predicate: predicate for search
-  ///   - context: context for search
-  /// - Returns: object or nil
+  ///   - context: context to search in
+  /// - Returns: NSManagedObject instance or nil
   static func findFirst<T: NSManagedObject>(with predicate: NSPredicate, in context: NSManagedObjectContext) -> T? {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
     request.predicate = predicate
@@ -143,8 +132,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt64 value: Int64, in context: NSManagedObjectContext) -> T? {
@@ -154,8 +143,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt32 value: Int32, in context: NSManagedObjectContext) -> T? {
@@ -165,8 +154,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt16 value: Int16, in context: NSManagedObjectContext) -> T? {
@@ -176,8 +165,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt8 value: Int8, in context: NSManagedObjectContext) -> T? {
@@ -187,8 +176,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt value: Int, in context: NSManagedObjectContext) -> T? {
@@ -198,8 +187,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withDouble value: Double, in context: NSManagedObjectContext) -> T? {
@@ -209,8 +198,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withFloat value: Float, in context: NSManagedObjectContext) -> T? {
@@ -220,8 +209,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withBool value: Bool, inContext context: NSManagedObjectContext) -> T? {
@@ -231,8 +220,8 @@ public extension NSManagedObject {
   /// Find first object by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - context: context for search
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withString value: String, in context: NSManagedObjectContext) -> T? {
@@ -271,8 +260,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt64 value: Int64) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -281,8 +270,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt32 value: Int32) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -291,8 +280,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt16 value: Int16) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -301,8 +290,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt8 value: Int8) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -311,8 +300,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withInt value: Int) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -321,8 +310,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withDouble value: Double) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -331,8 +320,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withFloat value: Float) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -341,8 +330,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withBool value: Bool) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = \(value)"))
@@ -351,8 +340,8 @@ public extension NSManagedObject {
   /// Find first object by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   /// - Returns: object or nil
   static func findFirst<T: NSManagedObject>(by attribute: String, withString value: String) -> T? {
     return findFirst(with: NSPredicate(format: "\(attribute) = %@", value))
@@ -363,7 +352,7 @@ public extension NSManagedObject {
   /// Find all objects in context
   ///
   /// - Parameter context: NSManagedObjectContext for fetch request
-  /// - Returns: array of objects
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(in context: NSManagedObjectContext) -> [T] {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
     
@@ -383,7 +372,7 @@ public extension NSManagedObject {
   /// - Parameters:
   ///   - predicate: NSPredicate for search
   ///   - context: NSManagedObjectContext for fetch request
-  /// - Returns: array of objects
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(with predicate: NSPredicate, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
     request.predicate = predicate
@@ -404,8 +393,8 @@ public extension NSManagedObject {
   /// - Parameters:
   ///   - sortedBy: column name to sort by
   ///   - ascending: direction to sort by
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(sortedBy: String, ascending: Bool, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
     
@@ -430,8 +419,8 @@ public extension NSManagedObject {
   ///   - predicate: predicate for search
   ///   - sortedBy: column name to sort by
   ///   - ascending: direction to sort by
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(with predicate: NSPredicate, sortedBy: String, ascending: Bool, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
     request.predicate = predicate
@@ -456,10 +445,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withInt64 value: Int64, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -467,10 +456,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withInt32 value: Int32, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -478,10 +467,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withInt16 value: Int16, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -489,10 +478,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withInt8 value: Int8, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -500,10 +489,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withInt value: Int, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -511,10 +500,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withDouble value: Double, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -522,10 +511,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withFloat value: Float, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -533,10 +522,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withBool value: Bool, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
   }
@@ -544,10 +533,10 @@ public extension NSManagedObject {
   /// Find all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: array of objects
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
+  ///   - context: NSManagedObjectContext to perform fetch in
+  /// - Returns: array of NSManagedObject's subclass instances
   static func findAll<T: NSManagedObject>(by attribute: String, withString value: String, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> [T] {
     return findAll(with: NSPredicate(format: "\(attribute) = %@", value), in: context)
   }
@@ -560,7 +549,7 @@ public extension NSManagedObject {
   ///   - sortedBy: column name to sort by
   ///   - ascending: direction to sort by
   ///   - delegate: NSFetchedResultsControllerDelegate
-  ///   - context: NSManagedObjectContext to fetch request
+  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: NSFetchedResultsController
   @available(OSX 10.12, *)
   static func fetchAll<T: NSManagedObject>(sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> NSFetchedResultsController<T>? {
@@ -596,7 +585,7 @@ public extension NSManagedObject {
   ///   - sortedBy: column name to sort by
   ///   - ascending: direction to sort by
   ///   - delegate: NSFetchedResultsControllerDelegate
-  ///   - context: NSManagedObjectContext to fetch request
+  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: NSFetchedResultsController
   @available(OSX 10.12, *)
   static func fetchAll<T: NSManagedObject>(with predicate: NSPredicate, sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> NSFetchedResultsController<T>? {
@@ -671,11 +660,11 @@ public extension NSManagedObject {
   /// Fetch all objects by attribute in context
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - value: value for search
+  ///   - attribute: name of attribute to match value
+  ///   - value: value to match attribute with
   ///   - sortedBy: column name to sort by
   ///   - ascending: direction to sort by
-  ///   - context: NSManagedObjectContext to fetch request
+  ///   - context: NSManagedObjectContext to perform fetch in
   ///   - delegate: NSFetchedResultsControllerDelegate
   /// - Returns: NSFetchedResultsController
   @available(OSX 10.12, *)
@@ -685,13 +674,13 @@ public extension NSManagedObject {
   
   // MARK: - Aggregate functions
   
-  /// Sum by attribute
+  /// Calculate sum by attribute
   ///
   /// - Parameters:
-  ///   - attribute: name of attribute for search
-  ///   - predicate: NSPredicate for search
-  ///   - context: NSManagedObjectContext to fetch request
-  /// - Returns: NSNumber or nil
+  ///   - attribute: name of the attribute to calculate sum
+  ///   - predicate: NSPredicate for filtering
+  ///   - context: NSManagedObjectContext for fetching (mainContext is default)
+  /// - Returns: NSNumber with total sum or nil
   static func sum(on attribute: String, with predicate: NSPredicate, in context: NSManagedObjectContext = NSManagedObjectContext.mainContext) -> NSNumber? {
     let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
     
@@ -717,7 +706,6 @@ public extension NSManagedObject {
       let objects = results as NSArray
       guard let first = objects.firstObject as? [String: Any] else { return nil }
       return first[receiverName] as? NSNumber
-      
     } catch {
       if CoreDuck.printErrors {
         print("⚠️ failed to fetch request for " + entityName)

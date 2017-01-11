@@ -11,19 +11,19 @@ open class CoreDuck {
   
   /// Singleton instance of CoreData stack
   open static let quack = CoreDuck()
-
-  /// Set to true to print NSManagedObjectContext save errors to console
+  
+  /// Set this variable to true if you want to print errors to console
   open static var printErrors: Bool = false
   
-  /// Name of *.xcdatamodel file
+  /// Name of your *.xcdatamodel file
   open static var coreDataModelName = "CoreData"
   
   init() {
     let _ = self.mainContext
   }
   
+  /// Directory to store CoreData files
   fileprivate lazy var applicationStoreDirectory: NSURL = {
-    // The directory the application uses to store the Core Data store file.
     #if os(iOS)
       let urls = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
       return urls[urls.count-1] as NSURL
@@ -36,14 +36,16 @@ open class CoreDuck {
     #endif
   }()
   
+  /// NSManagedObjectModel for CoreDuck stack
+  /// This property is not optional. It is a fatal error for the application not to be able to find and load its model.
   fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
-    // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
     let modelURL = Bundle.main.url(forResource: CoreDuck.coreDataModelName, withExtension: "momd")!
     return NSManagedObjectModel(contentsOf: modelURL)!
   }()
   
+  /// NSPersistentStoreCoordinator for CoreDuck stack.
+  /// Creates and returns instance of NSPersistentStoreCoordinator. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
   fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-    // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
     #if os(iOS)
       // Create the coordinator and store
       let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -69,7 +71,7 @@ open class CoreDuck {
       var shouldFail = false
       var failureReason = "There was an error creating or loading the application's saved data."
       
-      // Make sure the application files directory is there
+      // Make sure application files directory is there
       do {
         let properties = try self.applicationStoreDirectory.resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
         if !(properties[URLResourceKey.isDirectoryKey]! as AnyObject).boolValue {
@@ -89,7 +91,7 @@ open class CoreDuck {
         }
       }
       
-      // Create the coordinator and store
+      // Create coordinator and store
       var coordinator: NSPersistentStoreCoordinator? = nil
       if failError == nil {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -123,21 +125,25 @@ open class CoreDuck {
     #endif
   }()
   
-  /// NSManagedObjectContext for private queue with privateQueueConcurrencyType
+  /// NSManagedObjectContext with privateQueueConcurrencyType
+  /// It's used internally in CoreDuck as the only context to write to persistence store
+  /// For saving data use backgroundContext instead
   lazy var writingContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     context.persistentStoreCoordinator = self.persistentStoreCoordinator
     return context
   }()
   
-  /// NSManagedObjectContext for main queue with mainQueueConcurrencyType
+  /// NSManagedObjectContext with mainQueueConcurrencyType
+  /// Use it with UIKit, since it's the only NSManagedObjectContext that exists on main thread
   open lazy var mainContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     context.parent = self.writingContext
     return context
   }()
   
-  /// NSManagedObjectContext for private queue with privateQueueConcurrencyType
+  /// NSManagedObjectContext with privateQueueConcurrencyType
+  /// Use it for background save operations
   open var backgroundContext: NSManagedObjectContext {
     let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     context.parent = self.mainContext
@@ -146,8 +152,8 @@ open class CoreDuck {
   
   /// Save all contexts
   ///
-  /// - Parameter receivedContext: object added to this context
-  /// - Returns: true or false
+  /// - Parameter receivedContext: background context to save
+  /// - Returns: success of contexts save operation (true or false)
   func saveContexts(contextWithObject receivedContext: NSManagedObjectContext) -> Bool {
     
     var success = true
@@ -198,8 +204,8 @@ open class CoreDuck {
   
   /// Save all contexts and wait
   ///
-  /// - Parameter receivedContext: object added to this context
-  /// - Returns: true or false
+  /// - Parameter receivedContext: background context to save
+  /// - Returns: success of contexts save operation (true or false)
   func saveContextsAndWait(contextWithObject receivedContext: NSManagedObjectContext) -> Bool {
     
     var success = true
