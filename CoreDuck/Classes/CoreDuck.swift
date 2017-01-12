@@ -174,28 +174,19 @@ open class CoreDuck {
                 try CoreDuck.quack.writingContext.save()
               } catch let error as NSError {
                 // Writing NSManagedObjectContext save error
-                if CoreDuck.printErrors {
-                  print("⚠️ Writing NSManagedObjectContext save error:", error.userInfo)
-                }
-                
+                CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
                 success = false
               }
             }
           } catch let error as NSError {
             // Main NSManagedObjectContext save error
-            if CoreDuck.printErrors {
-              print("⚠️ Main NSManagedObjectContext save error:", error.userInfo)
-            }
-            
+            CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
             success = false
           }
         }
       } catch let error as NSError {
         // Background NSManagedObjectContext save error
-        if CoreDuck.printErrors {
-          print("⚠️ Background NSManagedObjectContext save error:", error.userInfo)
-        }
-        
+        CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
         success = false
       }
     }
@@ -226,31 +217,32 @@ open class CoreDuck {
                 try CoreDuck.quack.writingContext.save()
               } catch let error as NSError {
                 // Writing NSManagedObjectContext save error
-                if CoreDuck.printErrors {
-                  print("⚠️ Writing NSManagedObjectContext save error:", error.userInfo)
-                }
-                
+                CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
                 success = false
               }
             }
           } catch let error as NSError {
             // Main NSManagedObjectContext save error
-            if CoreDuck.printErrors {
-              print("⚠️ Main NSManagedObjectContext save error:", error.userInfo)
-            }
-            
+            CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
             success = false
           }
         }
       } catch let error as NSError {
         // Background NSManagedObjectContext save error
-        if CoreDuck.printErrors {
-          print("⚠️ Background NSManagedObjectContext save error:", error.userInfo)
-        }
-        
+        CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
         success = false
       }
     }
     return success
+  }
+  
+  /// Print error in console
+  /// Will print error only if `printErrors` set in true
+  ///
+  /// - Parameter error: String error text
+  static func printError(_ error: String) {
+    if CoreDuck.printErrors {
+      print("⚠️ ", error)
+    }
   }
 }
