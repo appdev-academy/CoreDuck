@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Access main NSManagedContext
     let _ = CoreDuck.quack.mainContext
     // or
-    let _ = NSManagedObjectContext.mainContext
+    let _ = NSManagedObjectContext.main
     
     // Get background NSManagedObjectContext
     let _ = CoreDuck.quack.backgroundContext
     // or
-    let _ = NSManagedObjectContext.backgroundContext
+    let _ = NSManagedObjectContext.background
     
     // Make some changes to NSManagedObjects
     NSManagedObjectContext.saveWithBlock({

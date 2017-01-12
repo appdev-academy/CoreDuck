@@ -321,10 +321,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int64) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -333,10 +332,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int32) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -345,10 +343,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int16) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -357,10 +354,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int8) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -369,10 +365,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -381,10 +376,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Double) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -393,10 +387,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Float) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -405,10 +398,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Bool) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = \(value)"), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"))
   }
   
   /// Find all objects by attribute
@@ -417,10 +409,9 @@ public extension NSManagedObjectContext {
   ///   - entity: NSManagedObject entity for detect type
   ///   - attribute: name of attribute to match value
   ///   - value: value to match attribute with
-  ///   - context: NSManagedObjectContext to perform fetch in
   /// - Returns: array of NSManagedObject's subclass instances
   func findAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: String) -> [T] {
-    return findAll(with: NSPredicate(format: "\(attribute) = %@", value), in: context)
+    return findAll(entity: entity, with: NSPredicate(format: "\(attribute) = %@", value))
   }
   
   // MARK: - NSFetchedResultsController functions
@@ -544,47 +535,6 @@ public extension NSManagedObjectContext {
   @available(OSX 10.12, *)
   func fetchAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int64, sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     return fetchAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"), sortedBy: sortedBy, ascending: ascending, delegate: delegate)
-  }
-  
-  // MARK: - Aggregate functions
-  
-  /// Calculate sum by attribute
-  ///
-  /// - Parameters:
-  ///   - entity: NSManagedObject entity for detect type
-  ///   - attribute: name of the attribute to calculate sum
-  ///   - predicate: NSPredicate for filtering
-  /// - Returns: NSNumber with total sum or nil
-  func sum(entity: T.Type, on attribute: String, with predicate: NSPredicate) -> NSNumber? {
-    let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
-    
-    // Predicate
-    request.predicate = predicate
-    
-    // Set result type
-    request.resultType = .dictionaryResultType
-    
-    let receiverName = "total"
-    
-    // Create expression
-    let keyPath = NSExpression(forKeyPath: attribute)
-    let calc = NSExpressionDescription()
-    calc.name = receiverName
-    calc.expression = NSExpression(forFunction: "sum:", arguments: [keyPath])
-    calc.expressionResultType = .doubleAttributeType
-    
-    request.propertiesToFetch = [calc]
-    
-    do {
-      let results = try fetch(request)
-      let objects = results as NSArray
-      guard let first = objects.firstObject as? [String: Any] else { return nil }
-      return first[receiverName] as? NSNumber
-      
-    } catch {
-      CoreDuck.printError("Failed to fetch request for \(T.entityName), error: \(error.localizedDescription)")
-      return nil
-    }
   }
   
   // MARK: - Save contexts

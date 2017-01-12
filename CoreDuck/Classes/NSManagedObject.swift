@@ -44,4 +44,45 @@ public extension NSManagedObject {
       }
     })
   }
+  
+  // MARK: - Aggregate functions
+  
+  /// Calculate sum by attribute
+  ///
+  /// - Parameters:
+  ///   - attribute: name of the attribute to calculate sum
+  ///   - predicate: NSPredicate for filtering
+  ///   - context: NSManagedObjectContext for fetching (mainContext is default)
+  /// - Returns: NSNumber with total sum or nil
+  static func sum(on attribute: String, with predicate: NSPredicate, in context: NSManagedObjectContext = NSManagedObjectContext.main) -> NSNumber? {
+    let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+    
+    // Predicate
+    request.predicate = predicate
+    
+    // Set result type
+    request.resultType = .dictionaryResultType
+    
+    let receiverName = "total"
+    
+    // Create expression
+    let keyPath = NSExpression(forKeyPath: attribute)
+    let calc = NSExpressionDescription()
+    calc.name = receiverName
+    calc.expression = NSExpression(forFunction: "sum:", arguments: [keyPath])
+    calc.expressionResultType = .doubleAttributeType
+    
+    request.propertiesToFetch = [calc]
+    
+    do {
+      let results = try context.fetch(request)
+      let objects = results as NSArray
+      guard let first = objects.firstObject as? [String: Any] else { return nil }
+      return first[receiverName] as? NSNumber
+      
+    } catch {
+      CoreDuck.printError("Failed to fetch request for \(entityName), error: \(error.localizedDescription)")
+      return nil
+    }
+  }
 }
