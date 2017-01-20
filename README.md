@@ -24,13 +24,77 @@ it, simply add the following line to your Podfile:
 pod 'CoreDuck'
 ```
 
-# Creating objects
+## Initialization
+
+```swift
+import CoreDuck
+```
+
+```swift
+// Init CoreDuck
+let _ = CoreDuck.quack
+```
+
+If you want to see errors in console during development:
+```swift
+CoreDuck.printErrors = true
+```
+
+If you want to specifi name of CoreData *.xcdatamodeld file ("CoreData" by default):
+```swift
+/// Name of your *.xcdatamodel file
+CoreDuck.coreDataModelName = "YourModelName"
+```
+
+## Contexts
+
+```swift
+/// Main NSManagedObjectContext of the app.
+/// Primary usage is UIKit, works on the main thread of the app.
+/// It's a singleton - always returns the same instance.
+let context = NSManagedObjectContext.main
+
+/// Background NSManagedObjectContext.
+/// Returns new instance of NSManagedObjectContext each time you access this variable.
+/// Use it for persisting changes to CoreData.
+let backgroundContext = NSManagedObjectContext.main
+```
+
+## Saving data
+
+```swift
+NSManagedObjectContext.saveWithBlock({ context in
+
+}, completion: { success in
+
+})
+```
+
+```swift
+NSManagedObjectContext.saveWithBlockAndWait({ context in
+
+}, completion: { success in
+
+})
+```
+
+## Creating objects
 
 To create a new Core Data object in specified context:
 
 ```swift
-if let newEntity = NSManagedObjectContext.main.new(Entity.self) {
+if let newEntity = context.new(Entity.self) {
   // your code goes here
+}
+```
+
+## Getting object in context
+
+To create a new Core Data object in specified context:
+
+```swift
+if let entityInContext = context.get(entity) {
+// your code goes here
 }
 ```
 
@@ -48,30 +112,22 @@ As an example, let's assume that you have an entity named *Person*.
 You can retrieve all *Person* entities from your persistent store using the following function:
 
 ```swift
-if let people = NSManagedObjectContext.main.findAll(entity: Person.self) {
-  // your code goes here
-}
+let people = context.findAll(entity: Person.self)
 ```
 
 To return the same entities sorted by a specific attribute:
 
 ```swift
-if let people = NSManagedObjectContext.main.findAll(entity: Person.self, sortedBy: "name", ascending: true) {
-  // your code goes here
-}
+let people = context.findAll(entity: Person.self, sortedBy: "name", ascending: true)
 ```
 
 If you want to find object in Core Data by attribute, you can use following functions:
 ```swift
-if let people = NSManagedObjectContext.main.findAll(entity: Person.self, by: "name", with: "John") {
-  // your code goes here
-}
+let people = context.findFirst(entity: Person.self, by: "name", with: "John")
 ```
 
 ```swift
-if let people = NSManagedObjectContext.main.findAll(entity: Person.self, by: "officeID", with: 7) {
-  // your code goes here
-}
+let people = context.findFirst(entity: Person.self, by: "officeID", with: 7)
 ```
 
 #### Advanced search
@@ -79,22 +135,20 @@ if let people = NSManagedObjectContext.main.findAll(entity: Person.self, by: "of
 If you want to execute more accurate search request, you can use predicates:
 
 ```swift
-if let people = NSManagedObjectContext.main.findAll(entity: Person.self, with: NSPredicate(format: "entityID IN %@", peopleIDs)) {
-  // your code goes here
-}
+let people = context.findAll(entity: Person.self, with: NSPredicate(format: "entityID IN %@", peopleIDs))
 ```
 
 #### NSFetchedResultsController
 
 ```swift
-let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, sortedBy: "entityID", ascending: true, delegate: self)
+let people = context.fetchAll(entity: Person.self, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 
 ```swift
-let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, with: predicate, sortedBy: "entityID", ascending: true, delegate: self)
+let people = context.fetchAll(entity: Person.self, with: predicate, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 ```swift
-let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, by: "officeID", with: 7, sortedBy: "entityID", ascending: true, delegate: self)
+let people = context.fetchAll(entity: Person.self, by: "officeID", with: 7, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 
 ## Authors
