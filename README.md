@@ -62,19 +62,21 @@ let backgroundContext = NSManagedObjectContext.main
 
 ## Saving data
 
+Asynchronously:
 ```swift
 NSManagedObjectContext.saveWithBlock({ context in
-
+// your code goes here
 }, completion: { success in
-
+// completion block
 })
 ```
 
+Synchronously:
 ```swift
 NSManagedObjectContext.saveWithBlockAndWait({ context in
-
+// your code goes here
 }, completion: { success in
-
+// completion block
 })
 ```
 
@@ -90,7 +92,7 @@ if let newEntity = context.new(Entity.self) {
 
 ## Getting object in context
 
-To create a new Core Data object in specified context:
+Get reference to NSManagedObject instance in context:
 
 ```swift
 if let entityInContext = context.get(entity) {
