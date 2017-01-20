@@ -265,6 +265,27 @@ public extension NSManagedObjectContext {
     }
   }
   
+  /// Find all objects with predicate
+  ///
+  /// - Parameters:
+  ///   - entity: NSManagedObject entity for detect type
+  ///   - predicate: NSPredicate for search
+  ///   - limit: limit of fetched objects
+  /// - Returns: array of NSManagedObject's subclass instances
+  func findAll<T: NSManagedObject>(entity: T.Type, with predicate: NSPredicate, limit: Int) -> [T] {
+    let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
+    request.predicate = predicate
+    request.fetchLimit = limit
+    
+    do {
+      return try fetch(request)
+      
+    } catch {
+      CoreDuck.printError("Failed to fetch request of \(T.entityName), error: \(error.localizedDescription)")
+      return []
+    }
+  }
+  
   /// Find all objects
   ///
   /// - Parameters:
