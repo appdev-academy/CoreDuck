@@ -29,7 +29,7 @@ pod 'CoreDuck'
 To create a new Core Data object in specified context:
 
 ```swift
-if let newEntity = Entity.new(inContext: localContext) as? Entity {
+if let newEntity = NSManagedObjectContext.main.new(Entity.self) {
   // your code goes here
 }
 ```
@@ -48,7 +48,7 @@ As an example, let's assume that you have an entity named *Person*.
 You can retrieve all *Person* entities from your persistent store using the following function:
 
 ```swift
-if let people = Person.findAll(inContext: localContext) as? [Person] {
+if let people = NSManagedObjectContext.main.findAll(entity: Person.self) {
   // your code goes here
 }
 ```
@@ -56,34 +56,20 @@ if let people = Person.findAll(inContext: localContext) as? [Person] {
 To return the same entities sorted by a specific attribute:
 
 ```swift
-if let people = Person.findAll(sortedBy: "name", ascending: true) as? [Person] {
+if let people = NSManagedObjectContext.main.findAll(entity: Person.self, sortedBy: "name", ascending: true) {
   // your code goes here
 }
 ```
 
 If you want to find object in Core Data by attribute, you can use following functions:
 ```swift
-if let people = Person.findAll(byAttribute: "name", withStringValue: "John") as? [Person] {
+if let people = NSManagedObjectContext.main.findAll(entity: Person.self, by: "name", with: "John") {
   // your code goes here
 }
 ```
 
 ```swift
-if let people = Person.findAll(byAttribute: "officeID", withInt64Value: 7) as? [Person] {
-  // your code goes here
-}
-```
-
-You can use same functions, but with specific context, e.g. objects will be returned in context you specified:
-
-```swift
-if let people = Person.findAll(byAttribute: "name", withStringValue: "John", inContext: localContext) as? [Person] {
-  // your code goes here
-}
-```
-
-```swift
-if let people = Person.findAll(byAttribute: "officeID", withInt64Value: 7, inContext: localContext) as? [Person] {
+if let people = NSManagedObjectContext.main.findAll(entity: Person.self, by: "officeID", with: 7) {
   // your code goes here
 }
 ```
@@ -93,31 +79,22 @@ if let people = Person.findAll(byAttribute: "officeID", withInt64Value: 7, inCon
 If you want to execute more accurate search request, you can use predicates:
 
 ```swift
-if let people = Person.findAll(withPredicate: NSPredicate(format: "entityID IN %@", peopleIDs)) as? [Person] {
-  // your code goes here
-}
-```
-
-And the same with specific context:
-
-```swift
-if let people = Person.findAll(withPredicate: NSPredicate(format: "entityID IN %@", peopleIDs), inContext: localContext) as? [Person] {
+if let people = NSManagedObjectContext.main.findAll(entity: Person.self, with: NSPredicate(format: "entityID IN %@", peopleIDs)) {
   // your code goes here
 }
 ```
 
 #### NSFetchedResultsController
-\* iOS only
 
 ```swift
-let peopleRequest = Person.fetchAll(sortedBy: "entityID", ascending: true, delegate: self)
+let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 
 ```swift
-let peopleRequest = Person.fetchAll(withPredicate: predicate, sortBy: "entityID", ascending: true, inContext: mainContext, delegate: self)
+let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, with: predicate, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 ```swift
-let peopleRequest = Person.fetchAll(byAttribute: "officeID", withInt64Value: 7, sortBy: "entityID", ascending: true, inContext: mainContext, delegate: self)
+let peopleRequest = NSManagedObjectContext.main.fetchAll(entity: Person.self, by: "officeID", with: 7, sortedBy: "entityID", ascending: true, delegate: self)
 ```
 
 ## Authors
