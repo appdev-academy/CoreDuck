@@ -75,7 +75,7 @@ open class CoreDuck {
       do {
         let properties = try self.applicationStoreDirectory.resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
         if !(properties[URLResourceKey.isDirectoryKey]! as AnyObject).boolValue {
-          failureReason = "Expected a folder to store application data, found a file \(self.applicationStoreDirectory.path)."
+          failureReason = "Expected a folder to store application data, found a file \(self.applicationStoreDirectory.path ?? "")."
           shouldFail = true
         }
       } catch  {
@@ -117,7 +117,7 @@ open class CoreDuck {
           dict[NSUnderlyingErrorKey] = failError
         }
         let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-        NSApplication.shared().presentError(error)
+        NSApplication.shared.presentError(error)
         abort()
       } else {
         return coordinator!
