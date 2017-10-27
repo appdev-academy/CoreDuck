@@ -245,4 +245,8 @@ open class CoreDuck {
       print("⚠️ ", error)
     }
   }
+  
+  open static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
+    return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
+  }
 }
