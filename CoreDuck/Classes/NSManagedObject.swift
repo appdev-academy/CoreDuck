@@ -45,6 +45,20 @@ public extension NSManagedObject {
     })
   }
   
+  /// Delete all NSManagedObject subclass instances with batch request
+  @available(iOS 9.0, *)
+  static func batchDeleteAll() {
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    let context = NSManagedObjectContext.main
+    do {
+      try context.execute(deleteRequest)
+    } catch  {
+      CoreDuck.printError("Failed to delete objects")
+      print(error)
+    }
+  }
+  
   // MARK: - Aggregate functions
   
   /// Calculate sum by attribute
