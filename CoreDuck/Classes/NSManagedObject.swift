@@ -56,7 +56,6 @@ public extension NSManagedObject {
       try context.execute(deleteRequest)
     } catch  {
       CoreDuck.printError("Failed to delete objects")
-      print(error)
     }
   }
   
