@@ -117,7 +117,7 @@ open class CoreDuck {
           dict[NSUnderlyingErrorKey] = failError
         }
         let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-        NSApplication.shared.presentError(error)
+        print(error)
         abort()
       } else {
         return coordinator!
