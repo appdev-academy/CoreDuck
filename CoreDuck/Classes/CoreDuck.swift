@@ -45,7 +45,7 @@ open class CoreDuck {
   
   /// NSPersistentStoreCoordinator for CoreDuck stack.
   /// Creates and returns instance of NSPersistentStoreCoordinator. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-  fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+  lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     #if os(iOS)
       // Create the coordinator and store
       let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)

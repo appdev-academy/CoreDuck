@@ -13,6 +13,11 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    if #available(iOS 9.0, *) {
+      Entity.batchDeleteAll()
+    } else {
+      // Fallback on earlier versions
+      Entity.deleteAllObjects()
+    }
   }
 }

@@ -20,6 +20,8 @@
 		DE31058C1D8FB75D00FC0742 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE3105841D8FB75D00FC0742 /* CoreData.xcdatamodeld */; };
 		DE31058D1D8FB75D00FC0742 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE3105861D8FB75D00FC0742 /* Images.xcassets */; };
 		DE31058F1D8FB75D00FC0742 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3105881D8FB75D00FC0742 /* ViewController.swift */; };
+		DE7F88BD1FAB30C40066666E /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7F88BC1FAB30C40066666E /* Entity.swift */; };
+		DE7F88BF1FAB46360066666E /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7F88BE1FAB46360066666E /* Entity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		DE3105861D8FB75D00FC0742 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DE3105871D8FB75D00FC0742 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3105881D8FB75D00FC0742 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DE7F88BC1FAB30C40066666E /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		DE7F88BE1FAB46360066666E /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		FF0C64E611FD06E4E392FE5B /* Pods-CoreDuck-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +135,7 @@
 				DE3105761D8FB64500FC0742 /* Info.plist */,
 				DE3105721D8FB64500FC0742 /* Main.storyboard */,
 				DE3105771D8FB64500FC0742 /* ViewController.swift */,
+				DE7F88BC1FAB30C40066666E /* Entity.swift */,
 			);
 			path = "CoreDuck-macOS";
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 				DE3105801D8FB75D00FC0742 /* LaunchScreen.xib */,
 				DE3105821D8FB75D00FC0742 /* Main.storyboard */,
 				DE3105881D8FB75D00FC0742 /* ViewController.swift */,
+				DE7F88BE1FAB46360066666E /* Entity.swift */,
 			);
 			path = "CoreDuck-iOS";
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE7F88BF1FAB46360066666E /* Entity.swift in Sources */,
 				DE31058F1D8FB75D00FC0742 /* ViewController.swift in Sources */,
 				DE31058C1D8FB75D00FC0742 /* CoreData.xcdatamodeld in Sources */,
 				DE3105891D8FB75D00FC0742 /* AppDelegate.swift in Sources */,
@@ -374,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE7F88BD1FAB30C40066666E /* Entity.swift in Sources */,
 				DE31057D1D8FB64500FC0742 /* ViewController.swift in Sources */,
 				DE31057B1D8FB64500FC0742 /* CoreData.xcdatamodeld in Sources */,
 				DE3105781D8FB64500FC0742 /* AppDelegate.swift in Sources */,
