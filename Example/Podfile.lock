@@ -6,11 +6,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   CoreDuck:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  CoreDuck: e93dfbc145080a1b49631307cdaf19ee60c12be5
+  CoreDuck: 541752a12af7159bb563b31269b0befcaceebaab
 
 PODFILE CHECKSUM: 854b8b9c7c07ffb285ebf346d825348e70eea6a4
 
-COCOAPODS: 1.4.0.beta.2
+COCOAPODS: 1.5.3

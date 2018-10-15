@@ -10,13 +10,13 @@ import CoreData
 open class CoreDuck {
   
   /// Singleton instance of CoreData stack
-  open static let quack = CoreDuck()
+  public static let quack = CoreDuck()
   
   /// Set this variable to true if you want to print errors to console
-  open static var printErrors: Bool = false
+  public static var printErrors: Bool = false
   
   /// Name of your *.xcdatamodel file
-  open static var coreDataModelName = "CoreData"
+  public static var coreDataModelName = "CoreData"
   
   init() {
     let _ = self.mainContext
@@ -246,7 +246,7 @@ open class CoreDuck {
     }
   }
   
-  open static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
+  public static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
     return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
   }
 }
