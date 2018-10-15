@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CoreDuck"
-  s.version          = "1.2.1"
+  s.version          = "1.2.2"
   s.summary          = "Small and fast CoreData stack written in Swift"
   s.homepage         = "https://github.com/appdev-academy/CoreDuck"
   s.license          = 'MIT'
