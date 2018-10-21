@@ -10,13 +10,13 @@ import CoreData
 open class CoreDuck {
   
   /// Singleton instance of CoreData stack
-  open static let quack = CoreDuck()
+  public static let quack = CoreDuck()
   
   /// Set this variable to true if you want to print errors to console
-  open static var printErrors: Bool = false
+  public static var printErrors: Bool = false
   
   /// Name of your *.xcdatamodel file
-  open static var coreDataModelName = "CoreData"
+  public static var coreDataModelName = "CoreData"
   
   init() {
     let _ = self.mainContext
@@ -45,7 +45,7 @@ open class CoreDuck {
   
   /// NSPersistentStoreCoordinator for CoreDuck stack.
   /// Creates and returns instance of NSPersistentStoreCoordinator. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-  fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+  lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     #if os(iOS)
       // Create the coordinator and store
       let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -75,7 +75,7 @@ open class CoreDuck {
       do {
         let properties = try self.applicationStoreDirectory.resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
         if !(properties[URLResourceKey.isDirectoryKey]! as AnyObject).boolValue {
-          failureReason = "Expected a folder to store application data, found a file \(self.applicationStoreDirectory.path)."
+          failureReason = "Expected a folder to store application data, found a file \(self.applicationStoreDirectory.path ?? "")."
           shouldFail = true
         }
       } catch  {
@@ -117,7 +117,7 @@ open class CoreDuck {
           dict[NSUnderlyingErrorKey] = failError
         }
         let error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-        NSApplication.shared().presentError(error)
+        print(error)
         abort()
       } else {
         return coordinator!
@@ -244,5 +244,9 @@ open class CoreDuck {
     if CoreDuck.printErrors {
       print("⚠️ ", error)
     }
+  }
+  
+  public static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
+    return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
   }
 }

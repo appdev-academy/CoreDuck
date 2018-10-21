@@ -45,6 +45,22 @@ public extension NSManagedObject {
     })
   }
   
+  #if os(iOS)
+  /// Delete all NSManagedObject subclass instances with batch request
+  @available(iOS 9.0, *)
+  static func batchDeleteAll() {
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    let context = NSManagedObjectContext.background
+    do {
+      try CoreDuck.quack.persistentStoreCoordinator.execute(deleteRequest, with: context)
+      _ = CoreDuck.quack.saveContexts(contextWithObject: context)
+    } catch {
+      CoreDuck.printError("Failed to delete objects")
+    }
+  }
+  #endif
+  
   // MARK: - Aggregate functions
   
   /// Calculate sum by attribute
