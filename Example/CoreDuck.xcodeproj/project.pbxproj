@@ -265,7 +265,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CoreDuck-iOS/CoreDuck.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -274,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		81E889F5B43BB7ED56B4D768 /* [CP] Check Pods Manifest.lock */ = {
@@ -319,7 +319,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CoreDuck-macOS/Pods-CoreDuck-macOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CoreDuck-macOS/Pods-CoreDuck-macOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CoreDuck-macOS/CoreDuck.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -328,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoreDuck-macOS/Pods-CoreDuck-macOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoreDuck-macOS/Pods-CoreDuck-macOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
