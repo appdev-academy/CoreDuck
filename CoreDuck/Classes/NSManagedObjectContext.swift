@@ -90,7 +90,7 @@ public extension NSManagedObjectContext {
   func findFirst<T: NSManagedObject>(entity: T.Type, with predicate: NSPredicate) -> T? {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
     request.predicate = predicate
-    
+    request.fetchLimit = 1
     do {
       let results = try fetch(request)
       return results.first
@@ -217,6 +217,7 @@ public extension NSManagedObjectContext {
     // Sort Descriptors
     let sortDescriptor = NSSortDescriptor(key: sortedBy, ascending: ascending)
     request.sortDescriptors = [sortDescriptor]
+    request.fetchLimit = 1
     
     do {
       let results = try fetch(request)
