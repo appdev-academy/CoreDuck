@@ -29,7 +29,7 @@ open class CoreDuck {
       return urls[urls.count-1] as NSURL
     #endif
     
-    #if os(OSX)
+    #if os(macOS)
       let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
       let appSupportURL = urls[urls.count - 1]
       return appSupportURL.appendingPathComponent(Bundle.main.bundleIdentifier!) as NSURL
@@ -65,7 +65,7 @@ open class CoreDuck {
       return coordinator
     #endif
     
-    #if os(OSX)
+    #if os(macOS)
       let fileManager = FileManager.default
       var failError: NSError? = nil
       var shouldFail = false
@@ -95,14 +95,14 @@ open class CoreDuck {
       var coordinator: NSPersistentStoreCoordinator? = nil
       if failError == nil {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationStoreDirectory.appendingPathComponent("CocoaAppCD.storedata")
+        let url = self.applicationStoreDirectory.appendingPathComponent("CocoaAppCD.sqlite")
         do {
           // Migration options for persistent store
           let options = [
             NSMigratePersistentStoresAutomaticallyOption: true,
             NSInferMappingModelAutomaticallyOption: true
           ]
-          try coordinator!.addPersistentStore(ofType: NSXMLStoreType, configurationName: nil, at: url, options: options)
+          try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch {
           failError = error as NSError
         }

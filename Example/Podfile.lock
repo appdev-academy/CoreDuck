@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CoreDuck: 267ba0c52f69de837da9935cefca96a6cb473ac7
+  CoreDuck: 9f0ad91cc42332bcdc3b0276cf8194b8c3358dac
 
 PODFILE CHECKSUM: 854b8b9c7c07ffb285ebf346d825348e70eea6a4
 

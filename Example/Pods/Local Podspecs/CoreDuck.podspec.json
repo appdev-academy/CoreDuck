@@ -17,6 +17,7 @@
     "ios": "8.0",
     "osx": "10.10"
   },
+  "swift_versions": "4.2",
   "source_files": "CoreDuck/Classes/**/*",
   "frameworks": [
     "Foundation",
