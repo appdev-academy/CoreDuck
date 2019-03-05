@@ -15,6 +15,11 @@ class ViewController: NSViewController {
     super.viewDidLoad()
     
     // Delete all objects
-    Entity.deleteAllObjects()
+    if #available(OSX 10.11, *) {
+      Entity.batchDeleteAll()
+    } else {
+      // Fallback on earlier versions
+      Entity.deleteAllObjects()
+    }
   }
 }
