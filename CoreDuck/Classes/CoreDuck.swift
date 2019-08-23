@@ -26,12 +26,12 @@ open class CoreDuck {
   fileprivate lazy var applicationStoreDirectory: NSURL = {
     #if os(iOS)
       let urls = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-      return urls[urls.count-1] as NSURL
+      return urls.last! as NSURL
     #endif
     
     #if os(macOS)
       let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-      let appSupportURL = urls[urls.count - 1]
+      let appSupportURL = urls.last!
       return appSupportURL.appendingPathComponent(Bundle.main.bundleIdentifier!) as NSURL
     #endif
   }()
@@ -45,24 +45,19 @@ open class CoreDuck {
   
   /// NSPersistentStoreCoordinator for CoreDuck stack.
   /// Creates and returns instance of NSPersistentStoreCoordinator. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-  lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+  open lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     #if os(iOS)
       // Create the coordinator and store
-      let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-      let url = self.applicationStoreDirectory.appendingPathComponent("CoreData.sqlite")
-      var failureReason = "There was an error creating or loading the application's saved data."
-      do {
-        // Migration options for persistent store
-        let options = [
-          NSMigratePersistentStoresAutomaticallyOption: true,
-          NSInferMappingModelAutomaticallyOption: true
-        ]
-        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-      } catch {
+      let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+      let url = defaultPersistentStoreURL()
+      let result = addPersistentStore(at: url, for: coordinator)
+
+      switch result {
+      case .success:
+        return coordinator
+      case .failure:
         abort()
       }
-      
-      return coordinator
     #endif
     
     #if os(macOS)
@@ -73,16 +68,16 @@ open class CoreDuck {
       
       // Make sure application files directory is there
       do {
-        let properties = try self.applicationStoreDirectory.resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
+        let properties = try applicationStoreDirectory.resourceValues(forKeys: [URLResourceKey.isDirectoryKey])
         if !(properties[URLResourceKey.isDirectoryKey]! as AnyObject).boolValue {
-          failureReason = "Expected a folder to store application data, found a file \(self.applicationStoreDirectory.path ?? "")."
+          failureReason = "Expected a folder to store application data, found a file \(applicationStoreDirectory.path ?? "")."
           shouldFail = true
         }
-      } catch  {
+      } catch {
         let nserror = error as NSError
         if nserror.code == NSFileReadNoSuchFileError {
           do {
-            try fileManager.createDirectory(atPath: self.applicationStoreDirectory.path!, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(atPath: applicationStoreDirectory.path!, withIntermediateDirectories: true, attributes: nil)
           } catch {
             failError = nserror
           }
@@ -95,15 +90,13 @@ open class CoreDuck {
       var coordinator: NSPersistentStoreCoordinator? = nil
       if failError == nil {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationStoreDirectory.appendingPathComponent("CocoaAppCD.sqlite")
-        do {
-          // Migration options for persistent store
-          let options = [
-            NSMigratePersistentStoresAutomaticallyOption: true,
-            NSInferMappingModelAutomaticallyOption: true
-          ]
-          try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
+        let url = defaultPersistentStoreURL()
+        let result = addPersistentStore(at: url, for: coordinator!)
+
+        switch result {
+        case .success:
+          break
+        case .failure(let error):
           failError = error as NSError
         }
       }
@@ -248,5 +241,60 @@ open class CoreDuck {
   
   public static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
     return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
+  }
+
+  // MARK: - Persistent Store
+
+  /// Add NSPersistentStore at URL.
+  /// Private method that used on initialization of the default NSPersistentStoreCoordinator.
+  private func addPersistentStore(at persistentStoreURL: URL?, for coordinator: NSPersistentStoreCoordinator) -> Result<Bool, Error> {
+    do {
+      // Migration options for persistent store
+      let options = [
+        NSMigratePersistentStoresAutomaticallyOption: true,
+        NSInferMappingModelAutomaticallyOption: true
+      ]
+      try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: persistentStoreURL, options: options)
+      return .success(true)
+    } catch {
+      return .failure(error)
+    }
+  }
+
+  /// Add persistent store at URL
+  public func addPersistentStore(at persistentStoreURL: URL?) -> Result<Bool, Error> {
+    return addPersistentStore(at: persistentStoreURL, for: persistentStoreCoordinator)
+  }
+
+  /// Add persistent store
+  public func addDefaultPersistentStore() -> Bool {
+    let persistentStoreURL = defaultPersistentStoreURL()
+    let result = addPersistentStore(at: persistentStoreURL, for: persistentStoreCoordinator)
+    switch result {
+    case .failure:
+      return false
+    case .success:
+      return true
+    }
+  }
+
+  /// Destroy default NSPersistentStore at URL
+  @available(iOS 9.0, *)
+  @available(OSX 10.11, *)
+  public func destroyDefaultPersistentStore() -> Bool {
+    guard let persistentStoreURL = defaultPersistentStoreURL() else { return false }
+    do {
+      try persistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
+      return true
+    } catch {
+      CoreDuck.printError(error.localizedDescription)
+      return false
+    }
+  }
+
+  /// Default URL for NSPersistentStore
+  public func defaultPersistentStoreURL() -> URL? {
+    let url = applicationStoreDirectory.appendingPathComponent("CoreData.sqlite")
+    return url
   }
 }
