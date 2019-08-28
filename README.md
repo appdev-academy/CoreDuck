@@ -57,7 +57,7 @@ let context = NSManagedObjectContext.main
 /// Background NSManagedObjectContext.
 /// Returns new instance of NSManagedObjectContext each time you access this variable.
 /// Use it for persisting changes to CoreData.
-let backgroundContext = NSManagedObjectContext.main
+let backgroundContext = NSManagedObjectContext.background
 ```
 
 ## Saving data
