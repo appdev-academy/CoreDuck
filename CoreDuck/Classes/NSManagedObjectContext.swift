@@ -17,22 +17,14 @@ public extension NSManagedObjectContext {
   /// Primary usage is UIKit, works on the main thread of the app.
   /// It's a singleton - always returns the same instance.
   static var main: NSManagedObjectContext {
-    if #available(iOS 10.0, OSX 10.12, *) {
-      return CoreDuck.quack.viewContext
-    } else {
-      return CoreDuck.quack.mainContext
-    }
+    return CoreDuck.quack.mainContext
   }
   
   /// Background NSManagedObjectContext.
   /// Returns new instance of NSManagedObjectContext each time you access this variable.
   /// Use it for persisting changes to CoreData.
   static var background: NSManagedObjectContext {
-    if #available(iOS 10.0, OSX 10.12, *) {
-      return CoreDuck.quack.persistentContainer.newBackgroundContext()
-    } else {
-      return CoreDuck.quack.backgroundContext
-    }
+    return CoreDuck.quack.backgroundContext
   }
   
   // MARK: - Working with context

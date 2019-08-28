@@ -19,11 +19,7 @@ open class CoreDuck {
   public static var coreDataModelName = "CoreData"
   
   init() {
-    if #available(iOS 10.0, OSX 10.12, *) {
-      let _ = self.viewContext
-    } else {
-      let _ = self.mainContext
-    }
+    let _ = self.mainContext
   }
   
   /// Directory to store CoreData files
@@ -162,14 +158,6 @@ open class CoreDuck {
     return persistentContainer.persistentStoreCoordinator
   }()
   
-  @available(iOS 10.0, *)
-  @available(OSX 10.12, *)
-  /// NSManagedObjectContext that should be used only with UIKit, as it is main thread
-  open lazy var viewContext: NSManagedObjectContext = {
-    let context = persistentContainer.viewContext
-    return context
-  }()
-  
   /// NSManagedObjectContext with privateQueueConcurrencyType
   /// It's used internally in CoreDuck as the only context to write to persistence store
   /// For saving data use backgroundContext instead
@@ -182,17 +170,27 @@ open class CoreDuck {
   /// NSManagedObjectContext with mainQueueConcurrencyType
   /// Use it with UIKit, since it's the only NSManagedObjectContext that exists on main thread
   open lazy var mainContext: NSManagedObjectContext = {
-    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    context.parent = self.writingContext
-    return context
+    if #available(iOS 10.0, OSX 10.12, *) {
+      let context = persistentContainer.viewContext
+      return context
+    } else {
+      let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+      context.parent = self.writingContext
+      return context
+    }
   }()
   
   /// NSManagedObjectContext with privateQueueConcurrencyType
   /// Use it for background save operations
   open var backgroundContext: NSManagedObjectContext {
-    let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    context.parent = self.mainContext
-    return context
+    if #available(iOS 10.0, OSX 10.12, *) {
+      let context = persistentContainer.newBackgroundContext()
+      return context
+    } else {
+      let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+      context.parent = self.mainContext
+      return context
+    }
   }
   
   /// Save all contexts
@@ -209,9 +207,9 @@ open class CoreDuck {
         try receivedContext.save()
         
         if #available(iOS 10.0, OSX 10.12, *) {
-          CoreDuck.quack.viewContext.perform {
+          CoreDuck.quack.mainContext.perform {
             do {
-              try CoreDuck.quack.viewContext.save()
+              try CoreDuck.quack.mainContext.save()
             } catch let error as NSError {
               CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
               success = false
@@ -263,9 +261,9 @@ open class CoreDuck {
         try receivedContext.save()
         
         if #available(iOS 10.0, OSX 10.12, *) {
-          CoreDuck.quack.viewContext.performAndWait {
+          CoreDuck.quack.mainContext.performAndWait {
             do {
-              try CoreDuck.quack.viewContext.save()
+              try CoreDuck.quack.mainContext.save()
             } catch let error as NSError {
               CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
               success = false
