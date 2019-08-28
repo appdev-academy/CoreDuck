@@ -19,7 +19,11 @@ open class CoreDuck {
   public static var coreDataModelName = "CoreData"
   
   init() {
-    let _ = self.mainContext
+    if #available(iOS 10.0, OSX 10.12, *) {
+      let _ = self.viewContext
+    } else {
+      let _ = self.mainContext
+    }
   }
   
   /// Directory to store CoreData files
@@ -118,6 +122,54 @@ open class CoreDuck {
     #endif
   }()
   
+  // MARK: - Persistent Container
+  
+  @available(iOS 10.0, *)
+  @available(OSX 10.12, *)
+  /// Create Persistent Container
+  lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: CoreDuck.coreDataModelName, managedObjectModel: managedObjectModel)
+    container.persistentStoreDescriptions = [persistentStoreDescription]
+    container.loadPersistentStores { description, error in
+      if let error = error as NSError? {
+        CoreDuck.printError("Failed to load persistent stores, \(error.userInfo)")
+      }
+    }
+    return container
+  }()
+  
+  @available(iOS 10.0, *)
+  @available(OSX 10.12, *)
+  /// Create persistent stores for the PersistentContainer
+  private lazy var persistentStoreDescription: NSPersistentStoreDescription = {
+    if let url = defaultPersistentStoreURL() {
+      let description = NSPersistentStoreDescription(url: url)
+      description.shouldMigrateStoreAutomatically = true
+      description.shouldInferMappingModelAutomatically = true
+      return description
+    } else {
+      let url = NSPersistentContainer.defaultDirectoryURL()
+      let description = NSPersistentStoreDescription(url: url)
+      description.shouldMigrateStoreAutomatically = true
+      description.shouldInferMappingModelAutomatically = true
+      return description
+    }
+  }()
+  
+  @available(iOS 10.0, *)
+  @available(OSX 10.12, *)
+  open lazy var newPersistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    return persistentContainer.persistentStoreCoordinator
+  }()
+  
+  @available(iOS 10.0, *)
+  @available(OSX 10.12, *)
+  /// NSManagedObjectContext that should be used only with UIKit, as it is main thread
+  open lazy var viewContext: NSManagedObjectContext = {
+    let context = persistentContainer.viewContext
+    return context
+  }()
+  
   /// NSManagedObjectContext with privateQueueConcurrencyType
   /// It's used internally in CoreDuck as the only context to write to persistence store
   /// For saving data use backgroundContext instead
@@ -156,25 +208,36 @@ open class CoreDuck {
         // Save background NSManagedObjectContext
         try receivedContext.save()
         
-        CoreDuck.quack.mainContext.perform {
-          do {
-            // Save main NSManagedObjectContext
-            try CoreDuck.quack.mainContext.save()
-            
-            CoreDuck.quack.writingContext.perform {
-              do {
-                // Save writing NSManagedObjectContext
-                try CoreDuck.quack.writingContext.save()
-              } catch let error as NSError {
-                // Writing NSManagedObjectContext save error
-                CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
-                success = false
-              }
+        if #available(iOS 10.0, OSX 10.12, *) {
+          CoreDuck.quack.viewContext.perform {
+            do {
+              try CoreDuck.quack.viewContext.save()
+            } catch let error as NSError {
+              CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
+              success = false
             }
-          } catch let error as NSError {
-            // Main NSManagedObjectContext save error
-            CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
-            success = false
+          }
+        } else {
+          CoreDuck.quack.mainContext.perform {
+            do {
+              // Save main NSManagedObjectContext
+              try CoreDuck.quack.mainContext.save()
+              
+              CoreDuck.quack.writingContext.perform {
+                do {
+                  // Save writing NSManagedObjectContext
+                  try CoreDuck.quack.writingContext.save()
+                } catch let error as NSError {
+                  // Writing NSManagedObjectContext save error
+                  CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
+                  success = false
+                }
+              }
+            } catch let error as NSError {
+              // Main NSManagedObjectContext save error
+              CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
+              success = false
+            }
           }
         }
       } catch let error as NSError {
@@ -199,31 +262,42 @@ open class CoreDuck {
         // Save background NSManagedObjectContext
         try receivedContext.save()
         
-        CoreDuck.quack.mainContext.performAndWait {
-          do {
-            // Save main NSManagedObjectContext
-            try CoreDuck.quack.mainContext.save()
-            
-            CoreDuck.quack.writingContext.performAndWait {
-              do {
-                // Save writing NSManagedObjectContext
-                try CoreDuck.quack.writingContext.save()
-              } catch let error as NSError {
-                // Writing NSManagedObjectContext save error
-                CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
-                success = false
-              }
+        if #available(iOS 10.0, OSX 10.12, *) {
+          CoreDuck.quack.viewContext.performAndWait {
+            do {
+              try CoreDuck.quack.viewContext.save()
+            } catch let error as NSError {
+              CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
+              success = false
             }
-          } catch let error as NSError {
-            // Main NSManagedObjectContext save error
-            CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
-            success = false
+          }
+        } else {
+          CoreDuck.quack.mainContext.performAndWait {
+            do {
+              // Save main NSManagedObjectContext
+              try CoreDuck.quack.mainContext.save()
+              
+              CoreDuck.quack.writingContext.performAndWait {
+                do {
+                  // Save writing NSManagedObjectContext
+                  try CoreDuck.quack.writingContext.save()
+                } catch let error as NSError {
+                  // Writing NSManagedObjectContext save error
+                  CoreDuck.printError("Writing NSManagedObjectContext save error: \(error.userInfo)")
+                  success = false
+                }
+              }
+            } catch let error as NSError {
+              // Main NSManagedObjectContext save error
+              CoreDuck.printError("Main NSManagedObjectContext save error: \(error.userInfo)")
+              success = false
+            }
           }
         }
       } catch let error as NSError {
-        // Background NSManagedObjectContext save error
-        CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
-        success = false
+          // Background NSManagedObjectContext save error
+          CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
+          success = false
       }
     }
     return success
@@ -240,7 +314,11 @@ open class CoreDuck {
   }
   
   public static func managedObjectID(forURIRepresentation uri: URL) -> NSManagedObjectID? {
-    return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
+    if #available(iOS 10.0, OSX 10.12, *) {
+      return quack.newPersistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
+    } else {
+      return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
+    }
   }
 
   // MARK: - Persistent Store
@@ -278,17 +356,30 @@ open class CoreDuck {
     }
   }
 
-  /// Destroy default NSPersistentStore at URL
   @available(iOS 9.0, *)
   @available(OSX 10.11, *)
+  /// Destroy default NSPersistentStore at URL
   public func destroyDefaultPersistentStore() -> Bool {
-    guard let persistentStoreURL = defaultPersistentStoreURL() else { return false }
-    do {
-      try persistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
-      return true
-    } catch {
-      CoreDuck.printError(error.localizedDescription)
-      return false
+    if #available(iOS 10.0, OSX 10.12, *) {
+      guard let persistentStoreURL = getPersistentStoreURL() else { return false }
+      
+      do {
+        try newPersistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
+        return true
+      } catch {
+        CoreDuck.printError(error.localizedDescription)
+        return false
+      }
+    } else {
+      guard let persistentStoreURL = defaultPersistentStoreURL() else { return false }
+      
+      do {
+        try persistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
+        return true
+      } catch {
+        CoreDuck.printError(error.localizedDescription)
+        return false
+      }
     }
   }
 
@@ -296,5 +387,15 @@ open class CoreDuck {
   public func defaultPersistentStoreURL() -> URL? {
     let url = applicationStoreDirectory.appendingPathComponent("CoreData.sqlite")
     return url
+  }
+  
+  @available(iOS 10.0, *)
+  @available(OSX 10.12, *)
+  /// Get URL of persistent store if exists
+  func getPersistentStoreURL() -> URL? {
+    if let persistentStore = newPersistentStoreCoordinator.persistentStores.first {
+      return persistentStore.url
+    }
+    return nil
   }
 }
