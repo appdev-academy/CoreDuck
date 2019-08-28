@@ -172,6 +172,7 @@ open class CoreDuck {
   open lazy var mainContext: NSManagedObjectContext = {
     if #available(iOS 10.0, OSX 10.12, *) {
       let context = persistentContainer.viewContext
+      context.automaticallyMergesChangesFromParent = true
       return context
     } else {
       let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -182,7 +183,7 @@ open class CoreDuck {
   
   /// NSManagedObjectContext with privateQueueConcurrencyType
   /// Use it for background save operations
-  open var backgroundContext: NSManagedObjectContext {
+  open lazy var backgroundContext: NSManagedObjectContext = {
     if #available(iOS 10.0, OSX 10.12, *) {
       let context = persistentContainer.newBackgroundContext()
       return context
@@ -191,7 +192,7 @@ open class CoreDuck {
       context.parent = self.mainContext
       return context
     }
-  }
+  }()
   
   /// Save all contexts
   ///
