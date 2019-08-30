@@ -1,5 +1,5 @@
 PODS:
-  - CoreDuck (1.2.2)
+  - CoreDuck (1.2.3)
 
 DEPENDENCIES:
   - CoreDuck (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CoreDuck: 9f0ad91cc42332bcdc3b0276cf8194b8c3358dac
+  CoreDuck: 300f15545bb5be60e767fe373748539ce0ed035f
 
 PODFILE CHECKSUM: 854b8b9c7c07ffb285ebf346d825348e70eea6a4
 
-COCOAPODS: 1.7.0.beta.1
+COCOAPODS: 1.8.0.beta.2

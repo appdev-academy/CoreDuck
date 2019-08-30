@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CoreDuck"
-  s.version          = "1.2.2"
+  s.version          = "1.2.3"
   s.summary          = "Small and fast CoreData stack written in Swift"
   s.homepage         = "https://github.com/appdev-academy/CoreDuck"
   s.license          = 'MIT'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.10'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   
   s.source_files = 'CoreDuck/Classes/**/*'
   s.frameworks = 'Foundation', 'CoreData'
