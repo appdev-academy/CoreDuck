@@ -10,6 +10,6 @@ before_install:
 - xcodebuild -showsdks
 
 script:
-- set -o pipefail && xcodebuild -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-iOS -sdk iphonesimulator12.4 ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xcodebuild -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-macOS -sdk macosx10.14 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-iOS -sdk iphoneos14.2 | xcpretty
+- set -o pipefail && xcodebuild -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-macOS -sdk macosx11.0 | xcpretty
 - pod lib lint
