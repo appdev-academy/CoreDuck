@@ -11,5 +11,5 @@ before_install:
 
 script:
 - set -o pipefail && xcodebuild clean build -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-iOS -sdk iphonesimulator14.2 PLATFORM_NAME=iphonesimulator ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" | xcpretty
-- set -o pipefail && xcodebuild clean build -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-macOS -sdk macosx11.0 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" | xcpretty
+- set -o pipefail && xcodebuild clean build -workspace Example/CoreDuck.xcworkspace -scheme CoreDuck-macOS -sdk macosx11.0 PLATFORM_NAME=macOS ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" | xcpretty
 - pod lib lint
