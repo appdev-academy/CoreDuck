@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C21DB1F45D38EE76D2B671C5 /* Pods_CoreDuck_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9EC440E225CC1750A468A5 /* Pods_CoreDuck_iOS.framework */; };
+		98B88DC32E67888D2C1E4E91 /* Pods_CoreDuck_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9EC440E225CC1750A468A5 /* Pods_CoreDuck_iOS.framework */; };
+		B4C82506262509E9002CDBE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C82505262509E9002CDBE1 /* UIKit.framework */; };
 		D5A8E88759D2AFBF17FC152C /* Pods_CoreDuck_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46878D9815DE35E134F044A /* Pods_CoreDuck_macOS.framework */; };
 		DE3105781D8FB64500FC0742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3105701D8FB64500FC0742 /* AppDelegate.swift */; };
 		DE3105791D8FB64500FC0742 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE3105711D8FB64500FC0742 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		9C1941763117DDC0C5523DAF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A3326D45AB9E92C60E1A7EBE /* Pods-CoreDuck-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck-macOS/Pods-CoreDuck-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B46878D9815DE35E134F044A /* Pods_CoreDuck_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4C82505262509E9002CDBE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C661A16D5722D228D545E351 /* CoreDuck.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreDuck.podspec; path = ../CoreDuck.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D91BA4F052C29D9C09E4C3D6 /* Pods-CoreDuck-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreDuck-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoreDuck-iOS/Pods-CoreDuck-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DE0980D21D587A6600C02F2E /* CoreDuck-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreDuck-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C21DB1F45D38EE76D2B671C5 /* Pods_CoreDuck_iOS.framework in Frameworks */,
+				B4C82506262509E9002CDBE1 /* UIKit.framework in Frameworks */,
+				98B88DC32E67888D2C1E4E91 /* Pods_CoreDuck_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +124,7 @@
 		97C4A92F23083BF275347D59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4C82505262509E9002CDBE1 /* UIKit.framework */,
 				DE184E5C1D8FCA32003FFB00 /* CoreDuck.framework */,
 				5E9EC440E225CC1750A468A5 /* Pods_CoreDuck_iOS.framework */,
 				B46878D9815DE35E134F044A /* Pods_CoreDuck_macOS.framework */,
@@ -501,7 +505,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D91BA4F052C29D9C09E4C3D6 /* Pods-CoreDuck-iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -525,7 +528,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF0C64E611FD06E4E392FE5B /* Pods-CoreDuck-iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
