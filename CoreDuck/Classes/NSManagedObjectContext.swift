@@ -446,7 +446,6 @@ public extension NSManagedObjectContext {
   ///   - ascending: direction to sort by
   ///   - delegate: NSFetchedResultsControllerDelegate
   /// - Returns: NSFetchedResultsController
-  @available(OSX 10.12, *)
   func fetchAll<T: NSManagedObject>(entity: T.Type, sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
     
@@ -480,7 +479,6 @@ public extension NSManagedObjectContext {
   ///   - ascending: direction to sort by
   ///   - delegate: NSFetchedResultsControllerDelegate
   /// - Returns: NSFetchedResultsController
-  @available(OSX 10.12, *)
   func fetchAll<T: NSManagedObject>(entity: T.Type, with predicate: NSPredicate, sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
     
@@ -517,7 +515,6 @@ public extension NSManagedObjectContext {
   ///   - sectionNameKeyPath: A key path on result objects that returns the section name.
   ///   - delegate: The object that is notified when the fetched results changed.
   /// - Returns: NSFetchedResultsController
-  @available(OSX 10.12, *)
   func fetchAll<T: NSManagedObject>(entity: T.Type, with predicate: NSPredicate, sortDescriptors: [NSSortDescriptor], sectionNameKeyPath: String? = nil, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     let request: NSFetchRequest<T> = NSFetchRequest(entityName: T.entityName)
     
@@ -554,7 +551,6 @@ public extension NSManagedObjectContext {
   ///   - ascending: direction to sort by
   ///   - delegate: NSFetchedResultsControllerDelegate
   /// - Returns: NSFetchedResultsController
-  @available(OSX 10.12, *)
   func fetchAll<T: NSManagedObject>(entity: T.Type, by attribute: String, with value: Int64, sortedBy: String, ascending: Bool, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<T>? {
     return fetchAll(entity: entity, with: NSPredicate(format: "\(attribute) = \(value)"), sortedBy: sortedBy, ascending: ascending, delegate: delegate)
   }

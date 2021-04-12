@@ -14,15 +14,15 @@
   },
   "social_media_url": "https://twitter.com/AppDev_Academy",
   "platforms": {
-    "ios": "8.0",
-    "osx": "10.10"
+    "ios": "12.1",
+    "osx": "10.12"
   },
-  "swift_versions": "5.0",
+  "swift_versions": "5.3",
   "source_files": "CoreDuck/Classes/**/*",
   "frameworks": [
     "Foundation",
     "CoreData"
   ],
   "requires_arc": true,
-  "swift_version": "5.0"
+  "swift_version": "5.3"
 }

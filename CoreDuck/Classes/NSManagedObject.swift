@@ -46,18 +46,12 @@ public extension NSManagedObject {
   }
   
   /// Delete all NSManagedObject subclass instances with batch request
-  @available(iOS 9.0, *)
-  @available(OSX 10.11, *)
   static func batchDeleteAll() {
     let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
     let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     let context = NSManagedObjectContext.background
     do {
-      if #available(iOS 10.0, OSX 10.12, *) {
-        try CoreDuck.quack.newPersistentStoreCoordinator.execute(deleteRequest, with: context)
-      } else {
-        try CoreDuck.quack.persistentStoreCoordinator.execute(deleteRequest, with: context)
-      }
+      try CoreDuck.quack.newPersistentStoreCoordinator.execute(deleteRequest, with: context)
       _ = CoreDuck.quack.saveContexts(contextWithObject: context)
     } catch {
       CoreDuck.printError("Failed to delete objects")

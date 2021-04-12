@@ -51,7 +51,7 @@ open class CoreDuck {
       let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
       let url = defaultPersistentStoreURL()
       let result = addPersistentStore(at: url, for: coordinator)
-
+      
       switch result {
       case .success:
         return coordinator
@@ -92,7 +92,7 @@ open class CoreDuck {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = defaultPersistentStoreURL()
         let result = addPersistentStore(at: url, for: coordinator!)
-
+        
         switch result {
         case .success:
           break
@@ -120,8 +120,6 @@ open class CoreDuck {
   
   // MARK: - Persistent Container
   
-  @available(iOS 10.0, *)
-  @available(OSX 10.12, *)
   /// Create Persistent Container
   lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: CoreDuck.coreDataModelName, managedObjectModel: managedObjectModel)
@@ -134,8 +132,6 @@ open class CoreDuck {
     return container
   }()
   
-  @available(iOS 10.0, *)
-  @available(OSX 10.12, *)
   /// Create persistent stores for the PersistentContainer
   private lazy var persistentStoreDescription: NSPersistentStoreDescription = {
     if let url = defaultPersistentStoreURL() {
@@ -152,8 +148,6 @@ open class CoreDuck {
     }
   }()
   
-  @available(iOS 10.0, *)
-  @available(OSX 10.12, *)
   open lazy var newPersistentStoreCoordinator: NSPersistentStoreCoordinator = {
     return persistentContainer.persistentStoreCoordinator
   }()
@@ -294,9 +288,9 @@ open class CoreDuck {
           }
         }
       } catch let error as NSError {
-          // Background NSManagedObjectContext save error
-          CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
-          success = false
+        // Background NSManagedObjectContext save error
+        CoreDuck.printError("Background NSManagedObjectContext save error: \(error.userInfo)")
+        success = false
       }
     }
     return success
@@ -319,9 +313,9 @@ open class CoreDuck {
       return quack.persistentStoreCoordinator.managedObjectID(forURIRepresentation: uri)
     }
   }
-
+  
   // MARK: - Persistent Store
-
+  
   /// Add NSPersistentStore at URL.
   /// Private method that used on initialization of the default NSPersistentStoreCoordinator.
   private func addPersistentStore(at persistentStoreURL: URL?, for coordinator: NSPersistentStoreCoordinator) -> Result<Bool, Error> {
@@ -337,12 +331,12 @@ open class CoreDuck {
       return .failure(error)
     }
   }
-
+  
   /// Add persistent store at URL
   public func addPersistentStore(at persistentStoreURL: URL?) -> Result<Bool, Error> {
     return addPersistentStore(at: persistentStoreURL, for: persistentStoreCoordinator)
   }
-
+  
   /// Add persistent store
   public func addDefaultPersistentStore() -> Bool {
     let persistentStoreURL = defaultPersistentStoreURL()
@@ -354,42 +348,26 @@ open class CoreDuck {
       return true
     }
   }
-
-  @available(iOS 9.0, *)
-  @available(OSX 10.11, *)
+  
   /// Destroy default NSPersistentStore at URL
   public func destroyDefaultPersistentStore() -> Bool {
-    if #available(iOS 10.0, OSX 10.12, *) {
-      guard let persistentStoreURL = getPersistentStoreURL() else { return false }
-      
-      do {
-        try newPersistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
-        return true
-      } catch {
-        CoreDuck.printError(error.localizedDescription)
-        return false
-      }
-    } else {
-      guard let persistentStoreURL = defaultPersistentStoreURL() else { return false }
-      
-      do {
-        try persistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
-        return true
-      } catch {
-        CoreDuck.printError(error.localizedDescription)
-        return false
-      }
+    guard let persistentStoreURL = getPersistentStoreURL() else { return false }
+    
+    do {
+      try newPersistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
+      return true
+    } catch {
+      CoreDuck.printError(error.localizedDescription)
+      return false
     }
   }
-
+  
   /// Default URL for NSPersistentStore
   public func defaultPersistentStoreURL() -> URL? {
     let url = applicationStoreDirectory.appendingPathComponent("CoreData.sqlite")
     return url
   }
   
-  @available(iOS 10.0, *)
-  @available(OSX 10.12, *)
   /// Get URL of persistent store if exists
   func getPersistentStoreURL() -> URL? {
     if let persistentStore = newPersistentStoreCoordinator.persistentStores.first {
