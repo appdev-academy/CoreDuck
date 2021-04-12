@@ -1,11 +1,15 @@
 use_frameworks!
 
-pod 'CoreDuck', :path => '../'
+def shared_pods
+  pod 'CoreDuck', :path => '../'
+end
 
 target 'CoreDuck-iOS' do
   platform :ios, '12.1'
+  shared_pods
 end
 
 target 'CoreDuck-macOS' do
   platform :osx, '10.12'
+  shared_pods
 end
