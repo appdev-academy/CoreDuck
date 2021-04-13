@@ -17,12 +17,15 @@
     "ios": "12.1",
     "osx": "10.12"
   },
+  "frameworks": "CoreData",
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "osx": {
+    "frameworks": "AppKit"
+  },
   "swift_versions": "5.3",
   "source_files": "CoreDuck/Classes/**/*",
-  "frameworks": [
-    "Foundation",
-    "CoreData"
-  ],
   "requires_arc": true,
   "swift_version": "5.3"
 }

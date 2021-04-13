@@ -11,9 +11,13 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = '12.1'
   s.osx.deployment_target = '10.12'
+  
+  s.framework = 'CoreData'
+  s.ios.framework = 'UIKit'
+  s.osx.framework = 'AppKit'
+  
   s.swift_version = '5.3'
   
   s.source_files = 'CoreDuck/Classes/**/*'
-  s.frameworks = 'Foundation', 'CoreData'
   s.requires_arc = true
 end
