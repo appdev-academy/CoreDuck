@@ -52,16 +52,16 @@
 
 /* Begin PBXFileReference section */
 		0639B665A90EBAADCEADE82BD67B83E2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		0BA3EBFB8D16377B5A6731376EB0C18D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		0BA3EBFB8D16377B5A6731376EB0C18D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EB8555E38DE70792F7831E492B38D30 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		144597780E79D654C2A77FEB6B1D7D7A /* Pods-CoreDuck-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CoreDuck-macOS-dummy.m"; sourceTree = "<group>"; };
 		2238F030D7C38F20345746E7FCF9B926 /* Pods-CoreDuck-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CoreDuck-iOS.modulemap"; sourceTree = "<group>"; };
 		2D90B579A2F37B19EE16A67CF17A3F34 /* Pods-CoreDuck-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoreDuck-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		315F7AC19CBC3622B4E42C074651BC1B /* CoreDuck-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CoreDuck-iOS-umbrella.h"; sourceTree = "<group>"; };
-		35BE66A2F8565034D9AA480A6A42ABCA /* CoreDuck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreDuck.framework; path = "CoreDuck-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35BE66A2F8565034D9AA480A6A42ABCA /* CoreDuck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDuck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E8002C2B8AA90D0F1DE48AE350E935 /* CoreDuck-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "CoreDuck-macOS-Info.plist"; path = "../CoreDuck-macOS/CoreDuck-macOS-Info.plist"; sourceTree = "<group>"; };
-		37C113054B59E2F6E24F6BEF92269A40 /* CoreDuck.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CoreDuck.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		41A496ADFFA8134DB71547FBA8BAB61B /* Pods_CoreDuck_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CoreDuck_iOS.framework; path = "Pods-CoreDuck-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37C113054B59E2F6E24F6BEF92269A40 /* CoreDuck.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = CoreDuck.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		41A496ADFFA8134DB71547FBA8BAB61B /* Pods_CoreDuck_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2179E8B76C601AF0F819187863E7E7 /* CoreDuck-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "CoreDuck-macOS.debug.xcconfig"; path = "../CoreDuck-macOS/CoreDuck-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4FF9DEDE1BB2F8E523622430590C0B47 /* Pods-CoreDuck-macOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CoreDuck-macOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		54A73A601A87A40654A34FE0B0F18FDD /* CoreDuck-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "CoreDuck-macOS.modulemap"; path = "../CoreDuck-macOS/CoreDuck-macOS.modulemap"; sourceTree = "<group>"; };
@@ -79,14 +79,14 @@
 		89E908CC6AD5010372E09ABCE7F63F0B /* CoreDuck-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CoreDuck-iOS-Info.plist"; sourceTree = "<group>"; };
 		8BE2926878A1C48BB71BF3F85E45DF88 /* Pods-CoreDuck-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoreDuck-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8C5F17E721CE2CF88B22ECA42F24F846 /* CoreDuck-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CoreDuck-macOS-prefix.pch"; path = "../CoreDuck-macOS/CoreDuck-macOS-prefix.pch"; sourceTree = "<group>"; };
-		93D0489BB94B4617C793AF5DAFB0B339 /* Pods_CoreDuck_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CoreDuck_macOS.framework; path = "Pods-CoreDuck-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93D0489BB94B4617C793AF5DAFB0B339 /* Pods_CoreDuck_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDuck_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		951504BB0AAE55B4EA4385C5330B5282 /* CoreDuck.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDuck.swift; path = CoreDuck/Classes/CoreDuck.swift; sourceTree = "<group>"; };
 		9636922F867013EE14252E516567AF0A /* Pods-CoreDuck-iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CoreDuck-iOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		9BD5CFC6662E4E14EC6D9C390C310157 /* Pods-CoreDuck-macOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CoreDuck-macOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ACA117EBA7139EE2BEFBB2EC7BC1891E /* CoreDuck-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CoreDuck-iOS-dummy.m"; sourceTree = "<group>"; };
 		AE513F72147B48C42EC7B40674BAA415 /* Pods-CoreDuck-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CoreDuck-iOS-Info.plist"; sourceTree = "<group>"; };
-		BE26A662E3DA5BAE46891EE2C7F23A0D /* CoreDuck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreDuck.framework; path = "CoreDuck-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE26A662E3DA5BAE46891EE2C7F23A0D /* CoreDuck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDuck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5CA5AE21E9A283AC978652D196ECEC8 /* CoreDuck.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CoreDuck.h; path = CoreDuck/Classes/CoreDuck.h; sourceTree = "<group>"; };
 		CC357A7E91FC33BDF3CEF67AA985D323 /* Pods-CoreDuck-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoreDuck-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		CFF2169B28BE8B681143C2A0F15A8F92 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -98,7 +98,7 @@
 		EF84DE7A4E7BE8432E3EDD5830633783 /* CoreDuck-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "CoreDuck-macOS.release.xcconfig"; path = "../CoreDuck-macOS/CoreDuck-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		EFD81D1E8B2FBC76E91387B40E3EF94B /* Pods-CoreDuck-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CoreDuck-macOS.modulemap"; sourceTree = "<group>"; };
 		F4D2ED32A9F41E7B0CF036FCD109140E /* NSManagedObjectContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSManagedObjectContext.swift; path = CoreDuck/Classes/NSManagedObjectContext.swift; sourceTree = "<group>"; };
-		F64B9577308F8C7DF94FAF07AC5826FD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		F64B9577308F8C7DF94FAF07AC5826FD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FC381B981E320956C4C8AE87D3A0C9B4 /* NSManagedObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSManagedObject.swift; path = CoreDuck/Classes/NSManagedObject.swift; sourceTree = "<group>"; };
 		FE2E261341E8D829B82BFD7D686FA89A /* CoreDuck-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CoreDuck-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -586,9 +586,10 @@
 				PRODUCT_NAME = CoreDuck;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -759,9 +760,10 @@
 				PRODUCT_NAME = CoreDuck;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
